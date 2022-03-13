@@ -1,0 +1,7 @@
+media_root/
+media_temp/
+*.env
+Dockerfile
+docker-compose.yml
+.gitignore
+.dockerignore

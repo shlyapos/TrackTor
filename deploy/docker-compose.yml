@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+  proxy:
+    image: nginx:1.21-alpine
+    container_name: proxy_container
+    restart: always
+    volumes:
+      - media_root_volume:/usr/share/nginx.conf/media:ro
+      - ./configs/nginx.conf/:/etc/nginx.conf/conf.d:ro
+
+  database:
+    image: postgres:13-alpine
+    container_name: db_container
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=tracktor
+      - DATABASE_HOST=database
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:6.2
+    container_name: pgadmin_container
+    restart: always
+    env_file:
+      - .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - '${PGADMIN_PORT}:80'
+    depends_on:
+      - database
+    volumes:
+      - pg_admin_volume:/var/lib/pgadmin
+    logging:
+      driver: none
+
+volumes:
+  media_root_volume:
+    name: 'media_root_volume_001'
+  db_volume:
+    name: 'db_volume_001'
+  cache_volume:
+    name: 'cache_volume_001'
+  pg_admin_volume:
+    name: 'pg_admin_volume_001'
