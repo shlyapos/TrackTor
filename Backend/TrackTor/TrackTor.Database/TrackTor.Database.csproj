@@ -7,9 +7,4 @@
         <RootNamespace>ClassLibrary1</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Configurations" />
-      <Folder Include="Models" />
-    </ItemGroup>
-
 </Project>
