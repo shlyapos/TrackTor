@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "my-expo-project",
+    "slug": "my-expo-project",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": ["js", "jsx", "css", "ts", "tsx"]
+    },
+    "userInterfaceStyle": "automatic"
+  } 
+}
