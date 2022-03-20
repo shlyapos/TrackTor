@@ -1,9 +1,10 @@
 import * as React from 'react';
 import Constants from 'expo-constants';
 import { BottomNavigation } from 'react-native-paper';
+import TrackList from './pages/TrackList';
+import TrackCreate from './pages/TrackCreate';
 
-import TrackList from './pages/TrackList/TrackListPage';
-import TrackCreate from './pages/TrackCreate/TrackCreatePage';
+import styles from './App.module.css';
 
 const App = () => {
   const [index, setIndex] = React.useState(0);
@@ -19,6 +20,7 @@ const App = () => {
 
   return (
     <BottomNavigation
+      barStyle={styles.navigation}
       style={{ marginTop: Constants.statusBarHeight }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
