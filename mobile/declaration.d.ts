@@ -1,4 +1,4 @@
 declare module '*.module.css' {
-    const content: IntrinsicAttributes & IntrinsicClassAttributes<View> & Readonly<ViewProps> & Readonly<{ children?: ReactNode; }>;
+    const content: StyleProp<ViewStyle>;
     export default content;
 }
