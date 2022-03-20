@@ -5,4 +5,6 @@ const TrackCreate = () => {
   return (
     <TrackCreatePage />
   );
-}
+};
+
+export default TrackCreate;

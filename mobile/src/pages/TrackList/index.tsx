@@ -5,4 +5,6 @@ const TrackList = () => {
   return (
     <TrackListPage />
   );
-}
+};
+
+export default TrackList;
