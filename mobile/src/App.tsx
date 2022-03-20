@@ -1,14 +1,29 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import TrackList from './pages/TrackList/TrackListPage';
+import Constants from 'expo-constants';
+import { BottomNavigation } from 'react-native-paper';
 
-import styles from './styles/index.module.css';
+import TrackList from './pages/TrackList/TrackListPage';
+import TrackCreate from './pages/TrackCreate/TrackCreatePage';
 
 const App = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'list', title: 'Список треков', icon: 'format-list-text' },
+    { key: 'create', title: 'Создать трек', icon: 'pencil-outline' }
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    list: TrackList,
+    create: TrackCreate
+  })
+
   return (
-    <View style={styles.container}>
-      <TrackList />
-    </View>
+    <BottomNavigation
+      style={{ marginTop: Constants.statusBarHeight }}
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+    />
   );
 };
 
