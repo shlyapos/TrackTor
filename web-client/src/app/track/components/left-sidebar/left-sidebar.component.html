@@ -1,8 +1,8 @@
-<div *ngIf="isTrackListTab$ | async; then trackList else trackInfo"></div>   
-<ng-template #trackList>
+<div class="left-sidebar" *ngIf="isTrackListTab$ | async; then trackList else trackInfo"></div>   
+<ng-template class="left-sidebar" #trackList>
   <app-track-search></app-track-search>
   <app-track-list></app-track-list>
 </ng-template>
-<ng-template #trackInfo>
+<ng-template class="left-sidebar" #trackInfo>
   <app-track-info></app-track-info>
 </ng-template> 

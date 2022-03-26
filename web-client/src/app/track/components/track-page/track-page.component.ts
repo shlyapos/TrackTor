@@ -20,6 +20,10 @@ export class TrackPageComponent implements OnInit {
       return {
         id: faker.datatype.string(),
         name: faker.datatype.string(),
+        region: faker.address.city(),
+        distance: faker.datatype.number(),
+        time: faker.datatype.string(),
+        transport: 'foot',
       }
     });
 
