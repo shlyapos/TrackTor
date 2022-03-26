@@ -1,6 +1,6 @@
 @import '../../../../colors.less';
 
-/*p {
+p {
   font-size: 16px;
   font-style: normal;
   line-height: 20px;
@@ -14,26 +14,31 @@
 }
 
 .track-item {
-  background: @trackItem;
+  width: 100%;
+
   padding: 20px 16px;
-  margin: 0;
+
+  box-sizing: border-box;
+  background-color: @trackItem;
   border-bottom: 1px solid @trackItemBorder;
 
   .track-name {
-    height: 40px;
+    text-overflow: ellipsis;
     overflow: hidden;
-    white-space: pre-wrap;
+    white-space: nowrap;
+
     font-weight: 500;
     margin-bottom: 8px;
   }
 
   .track-region {
     margin-bottom: 4px;
+    color: @grayText;
   }
 
   .track-transport {
     color: @grayText;
-    margin-bottom: 13px;
+    margin-bottom: 12px;
   }
 
   .track-item-footer{
@@ -46,4 +51,9 @@
       text-align: right;
     }
   }
-}*/
+}
+
+.track-item:hover {
+  background-color: @colorHoverTransparent;
+  cursor: pointer;
+}
