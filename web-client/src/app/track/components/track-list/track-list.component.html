@@ -1,3 +1,1 @@
-<div class="track-list">
-  <app-track-item class="track-item" *ngFor="let track of tracks$ | async" [track]="track" (click)="onTrackItem(track)"></app-track-item>
-</div>
+<app-track-item class="track-item" *ngFor="let track of tracks$ | async" [track]="track" (click)="onTrackItem(track)"></app-track-item>
