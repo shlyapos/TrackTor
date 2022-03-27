@@ -11,6 +11,4 @@ export class TrackItemComponent {
   @Input()
   public track!: Track;
   
-  constructor() { }
-
 }

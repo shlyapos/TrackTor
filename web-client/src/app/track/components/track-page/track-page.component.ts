@@ -4,7 +4,6 @@ import { trackActions } from '../../track.actions';
 import { Track } from 'src/app/shared/models/track';
 import * as faker from 'faker';
 
-
 @Component({
   selector: 'app-track-page',
   templateUrl: './track-page.component.html',
