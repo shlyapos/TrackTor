@@ -1,0 +1,22 @@
+@import '../../../../colors.less';
+
+.track-list {
+  height: 100%;
+  display: block;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: @trackItem;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: @trackItem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: @grayText;
+  border-radius: 12px;
+}

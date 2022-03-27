@@ -1,0 +1,56 @@
+@import '../../../../colors.less';
+
+p {
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0.15px;
+  text-align: left;
+  width: 100%;
+  font-weight: 400;
+  color: @whiteText;
+  padding: 0px;
+  margin: 0px;
+}
+
+.track-item {
+  width: 100%;
+  padding: 20px 16px;
+  box-sizing: border-box;
+  background-color: @trackItem;
+  border-bottom: 1px solid @trackItemBorder;
+
+  .track-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .track-region {
+    margin-bottom: 4px;
+    color: @grayText;
+  }
+
+  .track-transport {
+    color: @grayText;
+    margin-bottom: 12px;
+  }
+
+  .track-item-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .track-time {
+      text-align: right;
+    }
+  }
+}
+
+.track-item:hover {
+  background-color: @colorHoverTransparent;
+  cursor: pointer;
+}
