@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  tileUrl: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  mapCenter: [63.9373, 92.6550]
 };
 
 /*
