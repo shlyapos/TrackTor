@@ -29,3 +29,5 @@ const Fonts = StyleSheet.create({
     color: Colors.colorAdditionalText,
   },
 });
+
+export default Fonts;

@@ -1,4 +1,4 @@
-enum Shapes {
+const enum Shapes {
   radius = 12,
 }
 
