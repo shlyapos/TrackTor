@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import Colors from './Colors';
+import Colors from './colors';
 
 const Fonts = StyleSheet.create({
   header3: {
@@ -23,7 +22,7 @@ const Fonts = StyleSheet.create({
   addText: {
     fontStyle: 'normal',
     fontWeight: '400',
-    fontsize: 14,
+    fontSize: 14,
     lineHeight: 16,
     letterSpacing: 0.15,
     color: Colors.colorAdditionalText,
