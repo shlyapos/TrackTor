@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { mapActions } from 'src/app/map/map.actions';
 import { LeftSidebarTabs } from 'src/app/shared/models/left-sidebar';
 import { Track } from 'src/app/shared/models/track';
 import { trackSelectors } from '../../track.reducer';
@@ -31,6 +32,7 @@ export class TrackListComponent {
 
   onTrackItem(track: Track) {
     this.store$.dispatch(leftSidebarActions.setActiveTab(LeftSidebarTabs.TrackInfo));
+    this.store$.dispatch(mapActions.setTrackCoords(track.coords));
   }
 
 }

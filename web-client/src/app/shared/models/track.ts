@@ -5,6 +5,12 @@ export interface Track {
   distance: number;
   time: string;
   transport: Transport;
+  coords: TrackCoord[];
+}
+
+export interface TrackCoord {
+  lat: number;
+  lng: number;
 }
 
 export type Transport = 
