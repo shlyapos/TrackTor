@@ -1,0 +1,8 @@
+<div class="leaderboard">
+  <h1 class="leaderboard-title">Таблица лидеров</h1>
+  <div class="leaderboard-item" *ngFor="let record of table.record">
+    <p>{{record.loginLeader}}</p>
+    <p class="leaderboard-item-time">{{record.time}}</p>
+  </div>
+</div>
+
