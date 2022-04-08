@@ -1,5 +1,5 @@
 import { Action, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { TrackCoord } from '../shared/models/track';
+import { TrackCoord } from '../shared/models/trackCoord';
 import { mapActions } from './map.actions';
 
 export const MAP_STATE_KEY = 'map';

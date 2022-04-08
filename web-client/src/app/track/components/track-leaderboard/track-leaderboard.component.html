@@ -1,6 +1,6 @@
 <div class="leaderboard">
   <h1 class="leaderboard-title">Таблица лидеров</h1>
-  <div class="leaderboard-item" *ngFor="let record of table.record">
+  <div class="leaderboard-item" *ngFor="let record of leaderboard$ | async">
     <p>{{record.loginLeader}}</p>
     <p class="leaderboard-item-time">{{record.time}}</p>
   </div>

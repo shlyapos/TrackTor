@@ -1,26 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { TrackLeaderboard } from 'src/app/shared/models/leaderboard';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { trackSelectors } from '../../track.reducer';
 
 @Component({
   selector: 'app-track-leaderboard',
   templateUrl: './track-leaderboard.component.html',
   styleUrls: ['./track-leaderboard.component.less']
 })
-export class TrackLeaderboardComponent implements OnInit {
+export class TrackLeaderboardComponent {
 
-  table: TrackLeaderboard = {
-    trackId: '1',
-    record:  Array.from({length: 50}).map((_, i) => {
-      return {
-        loginLeader: 'd',
-        time: '444'
-      }
-    }),
-  }
+  leaderboard$ = this.store$.select(trackSelectors.activeTrackLeaderboard)
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private readonly store$: Store) { }
 }

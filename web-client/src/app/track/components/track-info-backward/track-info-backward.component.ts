@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LeftSidebarTabs } from 'src/app/shared/models/left-sidebar';
+import { trackActions } from '../../track.actions';
 import { leftSidebarActions } from '../left-sidebar/left-sidebar.actions';
 
 @Component({
@@ -14,6 +15,7 @@ export class TrackInfoBackwardComponent {
 
   onBackWard() {
     this.store$.dispatch(leftSidebarActions.setActiveTab(LeftSidebarTabs.TrackList));
+    this.store$.dispatch(trackActions.setActiveTrack(null));
   }
 
 }

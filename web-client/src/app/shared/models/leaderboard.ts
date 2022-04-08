@@ -1,9 +1,4 @@
-export interface TrackLeaderboard {
-  trackId: string;
-  record: TrackLeaderboardItem[];
-}
-
-export interface TrackLeaderboardItem {
+export interface TrackLeaderboardRecord {
   loginLeader: string;
   time: string;
 }
