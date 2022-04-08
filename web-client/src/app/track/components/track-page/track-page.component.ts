@@ -15,6 +15,11 @@ export class TrackPageComponent implements OnInit {
 
   ngOnInit(): void {
     const randomCount = faker.datatype.number({min: 0, max: 10});
+    const mockCoords = [
+      {lat: 55.70042, lng: 37.57874},
+      {lat: 55.82848, lng: 37.64465 },
+      {lat: 55.78198, lng: 37.81631 },
+    ];
     const mockTrack:Track[] = Array.from({length: randomCount}).map((_, i) => {
       return {
         id: faker.datatype.string(),
@@ -23,6 +28,7 @@ export class TrackPageComponent implements OnInit {
         distance: faker.datatype.number(),
         time: faker.datatype.string(),
         transport: 'foot',
+        coords: mockCoords,
       }
     });
 
