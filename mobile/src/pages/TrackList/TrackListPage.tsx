@@ -1,10 +1,14 @@
-import React from 'react';
-import { Text } from 'react-native';
+import { PureComponent } from 'react';
+import { View, Text } from 'react-native';
 
-const TrackListPage: React.FC = () => {
-  return (
-    <Text>TrackListPage</Text>
-  );
-};
+import styles from './TrackListStyle';
 
-export default TrackListPage;
+export default class TrackListPage extends PureComponent {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>TrackListPage</Text>
+      </View>
+    );
+  }
+}
