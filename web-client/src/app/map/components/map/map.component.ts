@@ -23,10 +23,10 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.initMap(document.getElementById('map')!);
 
     this.store$.select(mapSelectors.trackCoords)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((coords) => {
-      this.map.updateMap(coords);
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((coords) => {
+        this.map.updateMap(coords);
+      });
   }
 
   ngOnDestroy() {

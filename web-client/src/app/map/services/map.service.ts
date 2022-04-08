@@ -57,7 +57,10 @@ export class MapService {
     const successMyGeolocation = (geolocation: GeolocationPosition) => { 
       const { latitude, longitude } = geolocation.coords;
   
-      this.myGeolocation = L.marker([latitude, longitude], {icon : this.myGeolactionIcon}).addTo(this.map).bindPopup(MY_GEOLOCATION_POPUP);        
+      this.myGeolocation = L.marker([latitude, longitude], {icon : this.myGeolactionIcon})
+        .addTo(this.map)
+        .bindPopup(MY_GEOLOCATION_POPUP); 
+               
       this.map.flyTo(this.myGeolocation.getLatLng());
     };
 
@@ -102,10 +105,12 @@ export class MapService {
       this.currentTrackMarkers = L.layerGroup();
   
       L.marker([trackCoords[0].lat, trackCoords[0].lng], {icon : this.markerIcon})
-        .addTo(this.currentTrackMarkers).bindPopup(START_TRACK_POPUP);
+        .addTo(this.currentTrackMarkers)
+        .bindPopup(START_TRACK_POPUP);
 
       L.marker([trackCoords[trackCoords.length - 1].lat, trackCoords[trackCoords.length - 1].lng], {icon : this.markerIcon})
-        .addTo(this.currentTrackMarkers).bindPopup(FINISH_TRACK_POPUP);
+        .addTo(this.currentTrackMarkers)
+        .bindPopup(FINISH_TRACK_POPUP);
   
       this.currentTrackMarkers.addTo(this.map);
     } else {
