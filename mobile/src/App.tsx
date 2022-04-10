@@ -19,7 +19,7 @@ const App = () => {
   });
 
   return (
-    <>
+    <React.Fragment>
       <StatusBar backgroundColor={styles.statusBar.backgroundColor} />
 
       <BottomNavigation
@@ -28,7 +28,7 @@ const App = () => {
         onIndexChange={setIndex}
         renderScene={renderScene}
       />
-    </>
+    </React.Fragment>
   );
 };
 
