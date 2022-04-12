@@ -1,12 +1,13 @@
-﻿namespace TrackTor.Database.Models.enums;
-
-public enum TransportType
+namespace TrackTor.DataBase.Models.Enums
 {
-    Hiking,
-    Scooter,
-    Bicycle,
-    Roller,
-    Skates,
-    Skiing,
-    Skateboard
+    public enum TransportType
+    {
+        Hiking,
+        Scooter,
+        Bicycle,
+        Roller,
+        Skates,
+        Skiing,
+        Skateboard,
+    }
 }

@@ -1,10 +1,12 @@
-﻿namespace TrackTor.Database.Models;
+using System;
 
-public class TrackCheckPoint
+namespace TrackTor.DataBase.Models
 {
-    public Guid Id { get; }
-    public Guid TrackId { get; set; }
-    public string Longitude { get; set; }
-    public string Latitude { get; set; }
-    
+    public class TrackCheckPoint
+    {
+        public Guid Id { get; }
+        public Guid TrackId { get; set; }
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
+    }
 }

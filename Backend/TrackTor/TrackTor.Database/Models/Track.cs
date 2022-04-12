@@ -1,14 +1,14 @@
-﻿using TrackTor.Database.Models.enums;
+using System;
+using TrackTor.DataBase.Models.Enums;
 
-namespace TrackTor.Database.Models;
-
-public class Track
+namespace TrackTor.DataBase.Models
 {
-    public Guid Id { get; }
-    public Guid UserId { get; set; }
-    public string Name { get; set; }
-    public TransportType TransportType { get; set; }
-    public string? Region { get; set; }
-    
-    
+    public class Track
+    {
+        public Guid Id { get; }
+        public Guid UserId { get; set; }
+        public string Name { get; set; }
+        public TransportType Type { get; set; }
+        public string? Region { get; set; }
+    }
 }
