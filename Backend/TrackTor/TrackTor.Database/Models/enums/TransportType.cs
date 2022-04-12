@@ -6,8 +6,7 @@ namespace TrackTor.DataBase.Models.Enums
         Scooter,
         Bicycle,
         Roller,
-        Skates,
-        Skiing,
         Skateboard,
+        Skiing
     }
 }
