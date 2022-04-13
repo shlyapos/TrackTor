@@ -1,12 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor", "TrackTor.csproj", "{78FE73D0-2C7A-473F-9DD1-D9636A21EF89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.WebService", "TrackTor.WebService\TrackTor.WebService.csproj", "{DA31D8D7-3954-4C2B-B966-F2E68EFA8011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.Database", "TrackTor.Database\TrackTor.Database.csproj", "{60D63370-A0CB-4FCB-A358-16DBA5DB912B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.Adaptor", "TrackTor.Adaptor\TrackTor.Adaptor.csproj", "{ACC4D0A3-5252-4537-BB77-C421BDED8674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.Adaptor", "TrackTor.Adaptor\TrackTor.Adaptor.csproj", "{837B64B2-4650-4786-AC9C-FC8F20AA0C0C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.WebService", "TrackTor.WebService\TrackTor.WebService.csproj", "{CF6D8D11-9A82-458C-8BB8-73EDBC291F8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.DataBase", "TrackTor.DataBase\TrackTor.DataBase.csproj", "{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,21 +12,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78FE73D0-2C7A-473F-9DD1-D9636A21EF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78FE73D0-2C7A-473F-9DD1-D9636A21EF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78FE73D0-2C7A-473F-9DD1-D9636A21EF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78FE73D0-2C7A-473F-9DD1-D9636A21EF89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60D63370-A0CB-4FCB-A358-16DBA5DB912B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60D63370-A0CB-4FCB-A358-16DBA5DB912B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60D63370-A0CB-4FCB-A358-16DBA5DB912B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60D63370-A0CB-4FCB-A358-16DBA5DB912B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{837B64B2-4650-4786-AC9C-FC8F20AA0C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{837B64B2-4650-4786-AC9C-FC8F20AA0C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{837B64B2-4650-4786-AC9C-FC8F20AA0C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{837B64B2-4650-4786-AC9C-FC8F20AA0C0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF6D8D11-9A82-458C-8BB8-73EDBC291F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF6D8D11-9A82-458C-8BB8-73EDBC291F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF6D8D11-9A82-458C-8BB8-73EDBC291F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF6D8D11-9A82-458C-8BB8-73EDBC291F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA31D8D7-3954-4C2B-B966-F2E68EFA8011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA31D8D7-3954-4C2B-B966-F2E68EFA8011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA31D8D7-3954-4C2B-B966-F2E68EFA8011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA31D8D7-3954-4C2B-B966-F2E68EFA8011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC4D0A3-5252-4537-BB77-C421BDED8674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC4D0A3-5252-4537-BB77-C421BDED8674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC4D0A3-5252-4537-BB77-C421BDED8674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC4D0A3-5252-4537-BB77-C421BDED8674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
