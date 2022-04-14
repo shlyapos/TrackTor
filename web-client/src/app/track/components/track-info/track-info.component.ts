@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { mapActions } from 'src/app/map/map.actions';
-import { LeftSidebarTabs } from 'src/app/shared/models/left-sidebar';
-import { leftSidebarActions } from '../left-sidebar/left-sidebar.actions';
+import { trackSelectors } from '../../track.reducer';
 
 @Component({
   selector: 'app-track-info',
@@ -11,11 +9,7 @@ import { leftSidebarActions } from '../left-sidebar/left-sidebar.actions';
 })
 export class TrackInfoComponent {
 
+  activeTrack$ = this.store$.select(trackSelectors.activeTrack)
+
   constructor(private readonly store$: Store) { }
-
-  onBackWard() {
-    this.store$.dispatch(leftSidebarActions.setActiveTab(LeftSidebarTabs.TrackList));
-    this.store$.dispatch(mapActions.setTrackCoords([]));
-  }
-
 }

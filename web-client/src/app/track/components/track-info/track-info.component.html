@@ -1,1 +1,18 @@
-<button mat-button color="primary" (click)="onBackWard()">Назад</button>
+<div class="track-info" *ngIf="(activeTrack$ | async) as track">
+  <textarea autosize class="track-name">{{track.name}}</textarea>
+  <p class="track-transport">{{track.transport}}</p>
+  <p class="track-region">{{track.region}}</p>
+  <div class="track-distance">
+    <p>Расстояние</p>
+    <p>{{track.distance}}</p>
+  </div>
+  <div class="track-time">
+    <p>Среднее время</p>
+    <p>{{track.time}}</p>
+  </div>
+  <div class="track-my-time">
+    <p>Ваше время</p>
+    <p>-:-</p>
+  </div>
+</div>
+<app-track-leaderboard></app-track-leaderboard>

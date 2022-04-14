@@ -1,0 +1,100 @@
+@import '../../../../colors.less';
+
+.track-info {
+  padding: 20px 16px;
+
+  p {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .track-name {
+    display: block;
+    width: 352px;
+    box-sizing: border-box;
+    background-color: @trackItem;
+    color: @whiteText;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    border: 1px solid @trackItemBorder;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    resize: none;
+    padding: 16px 8px;
+  }
+  
+  .track-name:focus { 
+    outline: none !important;
+  }
+
+  .track-transport, .track-region { 
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.15px;
+    color: @grayText;
+  }
+
+  .track-transport {
+    margin-bottom: 8px;
+  }
+
+  .track-region {
+    margin-bottom: 20px;
+  }
+
+  .track-distance, .track-time {
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    p {
+      color: @whiteText;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.15px;
+    }
+  }
+
+  .track-time {
+    margin-bottom: 24px;
+  }
+
+  .track-my-time {
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    p {
+      color: @whiteText;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 20px;
+      letter-spacing: 0.15px;
+    }
+  }
+  
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: @trackItem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: @grayText;
+  border-radius: 12px;
+}

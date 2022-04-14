@@ -1,7 +1,7 @@
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
+import { TrackCoord } from 'src/app/shared/models/trackCoord';
 import * as L from 'leaflet';
-import { TrackCoord } from 'src/app/shared/models/track';
 
 
 const MY_GEOLOCATION_POPUP = 'Мое местоположение';

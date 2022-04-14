@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { mapActions } from 'src/app/map/map.actions';
+import { map } from 'rxjs/operators';
 import { LeftSidebarTabs } from 'src/app/shared/models/left-sidebar';
 import { Track } from 'src/app/shared/models/track';
+import { trackActions } from '../../track.actions';
 import { trackSelectors } from '../../track.reducer';
 import { leftSidebarActions } from '../left-sidebar/left-sidebar.actions';
 import { trackSearchSelectors } from '../track-search/track-search.reducer';
@@ -20,7 +20,6 @@ export class TrackListComponent {
     this.store$.select(trackSelectors.tracks),
     this.store$.select(trackSearchSelectors.searchInput),
   ]).pipe(
-    tap(([tracks, searchInput]) => {console.log(tracks); console.log(searchInput)}),
     map(([tracks, searchInput]) =>
       tracks.filter(({ name }) =>
         name.toLowerCase().includes(searchInput.toLowerCase())
@@ -32,7 +31,7 @@ export class TrackListComponent {
 
   onTrackItem(track: Track) {
     this.store$.dispatch(leftSidebarActions.setActiveTab(LeftSidebarTabs.TrackInfo));
-    this.store$.dispatch(mapActions.setTrackCoords(track.coords));
+    this.store$.dispatch(trackActions.setActiveTrack(track));
   }
 
 }
