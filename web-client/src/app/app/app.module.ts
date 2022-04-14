@@ -1,3 +1,4 @@
+import { TuiRootModule, TuiAlertModule } from "@taiga-ui/core";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,7 @@ import { reducers, metaReducers, effects } from './index';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { BackendInterceptor } from '../mock-api/mock-api.interceptor';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,13 @@ import { BackendInterceptor } from '../mock-api/mock-api.interceptor';
       logOnly: environment.production
     }),
     EffectsModule.forRoot(effects),
+    TuiRootModule,
+    TuiAlertModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
