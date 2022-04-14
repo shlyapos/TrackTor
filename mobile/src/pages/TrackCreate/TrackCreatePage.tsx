@@ -1,14 +1,14 @@
-import React from 'react';
+import { PureComponent } from 'react';
 import { View, Text } from 'react-native';
 
-import styles from './TrackCreate.module.css';
+import styles from './TrackCreateStyle';
 
-const TrackCreatePage: React.FC = () => {
-  return (
-    <View>
-      <Text>TrackCreatePage</Text>
-    </View>
-  );
-};
-
-export default TrackCreatePage;
+export default class TrackCreatePage extends PureComponent {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>TrackCreatePage</Text>
+      </View>
+    );
+  }
+}

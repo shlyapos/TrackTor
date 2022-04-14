@@ -2,15 +2,18 @@ import { StyleSheet } from 'react-native';
 import Colors from './../../../../styles/colors';
 
 const styles = StyleSheet.create({
+  touchableContainer: {
+    color: Colors.colorHoverTransparent,
+  },
   container: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.colorBackgroundTransparentWhite,
     width: '100%',
     height: 136,
     paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 16,
     paddingRight: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.colorBackgroundTransparentWhite,
   },
   header: {
     marginBottom: 8,

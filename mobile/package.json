@@ -23,9 +23,7 @@
     "@babel/core": "^7.12.9",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
-    "babel-plugin-react-native-classname-to-style": "^1.2.2",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
-    "react-native-css-transformer": "^1.2.4",
     "react-native-paper": "^4.11.2",
     "typescript": "~4.3.5"
   },
