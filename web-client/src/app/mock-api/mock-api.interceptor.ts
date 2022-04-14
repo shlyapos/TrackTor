@@ -31,10 +31,10 @@ export class BackendInterceptor implements HttpInterceptor {
   ];
 
   private mockLeaderboard: TrackLeaderboardRecord[] = Array.from({length: 50}).map((_, i) => {
-      return {
-        loginLeader: faker.datatype.string(),
-        time: faker.datatype.string(),
-      }
+    return {
+      loginLeader: faker.datatype.string(),
+      time: faker.datatype.string(),
+    }
   });
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
