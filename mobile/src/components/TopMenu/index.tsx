@@ -40,6 +40,11 @@ export default class TopMenu extends PureComponent<ITopMenuProps> {
             icon='arrow-left'
             contentStyle={styles.buttonContent}
             labelStyle={styles.buttonLabel}
+            theme={{
+              colors: {
+                primary: styles.buttonOnPress.color,
+              },
+            }}
           >
             Назад
           </Button>
