@@ -2,13 +2,13 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import ITrackInfoProps from '../pages/TrackInfo';
 
 export type RootStackParams = {
-  TrackList: undefined;
+  Home: undefined;
   TrackInfo: { trackId: string };
 };
 
 export type TrackListScreenNavigationProp = StackNavigationProp<
   RootStackParams,
-  'TrackList'
+  'Home'
 >;
 
 export type TrackInfoScreenNavigationProp = StackNavigationProp<
