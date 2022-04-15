@@ -37,7 +37,7 @@ export default class TopMenu extends PureComponent<ITopMenuProps> {
           <Button
             onPress={onPress}
             mode='text'
-            icon='arrow-left'
+            icon='chevron-left'
             contentStyle={styles.buttonContent}
             labelStyle={styles.buttonLabel}
             theme={{
