@@ -4,7 +4,7 @@ import Colors from './styles/colors';
 
 const styles = StyleSheet.create({
   navigation: {
-    backgroundColor: Colors.colorAccent,
+    backgroundColor: Colors.colorBackground,
   },
   statusBar: {
     backgroundColor: Colors.colorBackground,
