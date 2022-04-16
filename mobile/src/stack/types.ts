@@ -1,14 +1,20 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import ITrackInfoProps from '../pages/TrackInfo';
+import { RouteProp } from '@react-navigation/native';
+import { IFrontendTrack } from '../models/tracks';
 
 export type RootStackParams = {
   Home: undefined;
-  TrackInfo: { trackId: string };
+  TrackInfo: { track: IFrontendTrack };
 };
 
 export type TrackListScreenNavigationProp = StackNavigationProp<
   RootStackParams,
-  'Home'
+  'TrackInfo'
+>;
+
+export type TrackInfoScreenScreenRouteProp = RouteProp<
+  RootStackParams,
+  'TrackInfo'
 >;
 
 export type TrackInfoScreenNavigationProp = StackNavigationProp<
