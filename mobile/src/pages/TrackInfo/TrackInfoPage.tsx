@@ -1,4 +1,4 @@
-import { PureComponent, Fragment } from 'react';
+import { PureComponent } from 'react';
 import {
   ScrollView,
   View,
@@ -6,7 +6,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   Text,
-  GestureResponderEvent,
 } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import MapView from 'react-native-maps';

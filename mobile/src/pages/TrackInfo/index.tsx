@@ -1,5 +1,4 @@
 import React from 'react';
-import { IFrontendTrack } from '../../models/tracks';
 import {
   TrackInfoScreenScreenRouteProp,
   TrackInfoScreenNavigationProp,
