@@ -11,6 +11,7 @@ import {
 import { Button, TextInput } from 'react-native-paper';
 import MapView from 'react-native-maps';
 import SlidingUpPanel from 'rn-sliding-up-panel';
+import { IFrontendTrack } from '../../models/tracks';
 import TopMenu from '../../components/TopMenu';
 
 import styles from './TrackInfoStyle';
@@ -20,8 +21,8 @@ const WindowHeight = Dimensions.get('window').height;
 const SliderOpacity = 0.5;
 let i = 0;
 
-interface ITrackInfoPageProps {
-  name: string;
+interface ITrackInfoPageProps extends IFrontendTrack {
+  onPress: () => void;
 }
 
 export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
@@ -30,13 +31,15 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
   };
 
   render() {
+    const { name, region, transport, distance, time, onPress } = this.props;
+
     return (
       <KeyboardAvoidingView
         enabled={false}
         behavior={OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
-        <TopMenu />
+        <TopMenu onPress={onPress} />
 
         <MapView style={styles.map} />
 
@@ -58,7 +61,7 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
 
             <ScrollView contentContainerStyle={styles.panelContent}>
               <TextInput
-                value='Прогулка по лесу, на этом маршруте можно увидеть речку, крутое дерево'
+                value={name}
                 autoComplete={'off'}
                 placeholder='Название'
                 mode={'outlined'}
@@ -79,12 +82,12 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
               </Button>
 
               <View style={styles.infoBlock}>
-                <Text style={styles.addText}>Москва</Text>
-                <Text style={styles.addText}>Пеший</Text>
+                <Text style={styles.addText}>{transport}</Text>
+                <Text style={styles.addText}>{region}</Text>
 
                 <View style={styles.infoBlockAdd}>
-                  <Text style={styles.text}>500 м</Text>
-                  <Text style={styles.text}>~ 1:30</Text>
+                  <Text style={styles.text}>{distance}</Text>
+                  <Text style={styles.text}>{time}</Text>
                 </View>
               </View>
 
