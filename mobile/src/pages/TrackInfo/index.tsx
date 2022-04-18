@@ -15,6 +15,8 @@ const TrackInfo: React.FC<ITrackInfoProps> = ({ route, navigation }) => {
     navigation.navigate('Home');
   };
 
+  const onStart = () => {};
+
   const { track } = route.params;
 
   return (
@@ -25,7 +27,9 @@ const TrackInfo: React.FC<ITrackInfoProps> = ({ route, navigation }) => {
       region={track.region}
       distance={track.distance}
       time={track.time}
+      coords={track.coords}
       onPress={onPress}
+      onStart={onStart}
     />
   );
 };

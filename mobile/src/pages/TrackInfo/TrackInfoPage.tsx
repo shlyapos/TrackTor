@@ -8,20 +8,21 @@ import {
   Text,
 } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
-import MapView from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { IFrontendTrack } from '../../models/tracks';
 import TopMenu from '../../components/TopMenu';
+import ScoreTableItem from './components/ScoreTableItem';
 
 import styles from './TrackInfoStyle';
 
 const OS = Platform.OS;
 const WindowHeight = Dimensions.get('window').height;
 const SliderOpacity = 0.5;
-let i = 0;
 
 interface ITrackInfoPageProps extends IFrontendTrack {
   onPress: () => void;
+  onStart: () => void;
 }
 
 export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
@@ -30,7 +31,16 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
   };
 
   render() {
-    const { name, region, transport, distance, time, onPress } = this.props;
+    const {
+      name,
+      region,
+      transport,
+      distance,
+      time,
+      coords,
+      onPress,
+      onStart,
+    } = this.props;
 
     return (
       <KeyboardAvoidingView
@@ -40,7 +50,33 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
       >
         <TopMenu onPress={onPress} />
 
-        <MapView style={styles.map} />
+        <MapView
+          initialRegion={{
+            latitude: coords![0].lat,
+            longitude: coords![0].lon,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          style={styles.map}
+        >
+          {coords?.map(({ lat, lon }) => (
+            <Marker
+              coordinate={{
+                latitude: lat,
+                longitude: lon,
+              }}
+            />
+          ))}
+          <Polyline
+            coordinates={coords?.map(({ lat, lon }) => ({
+              latitude: lat,
+              longitude: lon,
+            }))}
+            strokeWidth={3}
+            strokeColor={styles.mapPolylineColor.color}
+            lineCap={'round'}
+          />
+        </MapView>
 
         <SlidingUpPanel
           ref={(c) => (this._panel = c)}
@@ -76,6 +112,7 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
                 contentStyle={styles.buttonContent}
                 labelStyle={styles.buttonLabel}
                 mode='contained'
+                onPress={onStart}
               >
                 Бежать
               </Button>
@@ -95,7 +132,12 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
                 <Text style={styles.resultText}>1:30:10</Text>
               </View>
 
-              {/*  */}
+              <View style={styles.scoreTable}>
+                <Text style={styles.resultText}>Список лидеров</Text>
+                {/* TODO: вставка элементов таблицы либо из стора, либо из state */}
+                {/* TODO: надо бы убрать этот View :/ */}
+                <View style={styles.scoreScrollPadding} />{' '}
+              </View>
             </ScrollView>
           </View>
         </SlidingUpPanel>

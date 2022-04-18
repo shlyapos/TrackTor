@@ -13,15 +13,17 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   map: {
-    // flex: 1,
     width: '100%',
     height: '100%',
   },
+  mapPolylineColor: {
+    color: '#FF5555',
+  },
   panel: {
-    // flex: 2,
     backgroundColor: Colors.colorBackground,
     position: 'relative',
     borderRadius: 12,
+    height: '100%',
   },
   panelHeader: {
     alignItems: 'center',
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    height: '100%',
+    // height: '100%',
     paddingLeft: 16,
     paddingRight: 16,
     flexDirection: 'column',
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 20,
   },
   resultText: {
     fontStyle: 'normal',
@@ -101,6 +104,13 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0.15,
     color: Colors.colorWhiteText,
+  },
+  scoreTable: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  scoreScrollPadding: {
+    height: 20,
   },
 });
 
