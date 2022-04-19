@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import RootStackNavigator from './stack/RootStackNavigator';
+import RootStackNavigator from './stack';
 
 import styles from './AppStyle';
 
@@ -14,7 +14,10 @@ const AppPage = () => {
         },
       }}
     >
-      <StatusBar backgroundColor={styles.statusBar.backgroundColor} />
+      <StatusBar
+        backgroundColor={styles.statusBar.backgroundColor}
+        barStyle={'light-content'}
+      />
       <RootStackNavigator />
     </NavigationContainer>
   );
