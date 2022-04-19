@@ -26,10 +26,6 @@ interface ITrackInfoPageProps extends IFrontendTrack {
 }
 
 export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
-  state = {
-    scrollEnabled: false,
-  };
-
   render() {
     const {
       name,
@@ -58,9 +54,11 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
             longitudeDelta: 0.0421,
           }}
           style={styles.map}
+          showsBuildings
         >
-          {coords?.map(({ lat, lon }) => (
+          {coords?.map(({ lat, lon }, index) => (
             <Marker
+              key={index}
               coordinate={{
                 latitude: lat,
                 longitude: lon,
@@ -136,7 +134,7 @@ export default class TrackInfoPage extends PureComponent<ITrackInfoPageProps> {
                 <Text style={styles.resultText}>Список лидеров</Text>
                 {/* TODO: вставка элементов таблицы либо из стора, либо из state */}
                 {/* TODO: надо бы убрать этот View :/ */}
-                <View style={styles.scoreScrollPadding} />{' '}
+                <View style={styles.scoreScrollPadding} />
               </View>
             </ScrollView>
           </View>
