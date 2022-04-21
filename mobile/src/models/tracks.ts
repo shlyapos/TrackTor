@@ -1,4 +1,4 @@
-type Transport =
+export type Transport =
   | 'Пешком'
   | 'Самокат'
   | 'Велосипед'
