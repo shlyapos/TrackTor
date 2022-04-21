@@ -7,14 +7,13 @@ import Fonts from '../../styles/fonts';
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     backgroundColor: Colors.colorBackground,
+    display: 'flex',
     width: '100%',
     height: '100%',
+    justifyContent: 'center',
     paddingTop: Platform.OS === 'ios' ? Constants.statusBarHeight : 0,
-  },
-  inputContainer: {
-    alignItems: 'center',
-    display: 'flex',
     paddingLeft: 20,
     paddingRight: 20,
   },

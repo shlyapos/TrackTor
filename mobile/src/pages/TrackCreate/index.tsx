@@ -5,21 +5,23 @@ import { Transport } from '../../models/tracks';
 
 const TrackCreate = () => {
   const [name, setName] = React.useState('');
-  const [transport, setTransport] = React.useState<Transport>();
+  const [transport, setTransport] = React.useState<string | Transport>(
+    'Пешком'
+  ); // TODO: после замены TextInput на Select, надо будет убрать string
 
-  const onPressBack = () => {};
+  const onChangeName = (value: string) => setName(value); // TODO: после замены TextInput на Select, изменить логику
 
-  const onChangeName = (value: string) => setName(value);
-
-  const onChangeTransport = (value: Transport) => setTransport(value);
+  const onChangeTransport = (value: string) =>
+    setTransport(value as unknown as Transport);
 
   const onPressStart = () => {};
 
   return (
     <TrackCreatePage
+      name={name}
+      transport={transport}
       onChangeName={onChangeName}
       onChangeTransport={onChangeTransport}
-      onPressBack={onPressBack}
       onPressStart={onPressStart}
     />
   );
