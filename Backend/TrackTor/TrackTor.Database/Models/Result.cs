@@ -8,5 +8,8 @@ namespace TrackTor.DataBase.Models
         public Guid UserId { get; set; }
         public Guid TrackId { get; set; }
         public DateTime RecordTime { get; set; }
+
+        public Track? Track { get; set; }
+        public User? User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TrackTor.DataBase.Models
 {
@@ -8,5 +9,8 @@ namespace TrackTor.DataBase.Models
         public string Login { get; set; }
         public string Hash { get; set; }
         public string Salt { get; set; }
+
+        public List<Result>? Results { get; set; }
+        public List<Track>? Tracks { get; set; }
     }
 }
