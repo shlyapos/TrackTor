@@ -16,6 +16,14 @@ namespace TrackTor.DataBase.Configurations
             
             builder.Property(user => user.Hash).IsRequired();
             builder.Property(user => user.Salt).IsRequired();
+
+            builder.HasMany(user => user.Results)
+                .WithOne(res => res.User!)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.HasMany(user => user.Tracks)
+                .WithOne(track => track.User!)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

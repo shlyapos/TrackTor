@@ -16,6 +16,17 @@ namespace TrackTor.DataBase.Configurations
             
             builder.Property(track => track.Name).IsRequired();
             builder.Property(track => track.Type).IsRequired();
+            builder.Property(track => track.Distance).IsRequired();
+            builder.Property(track => track.AverageTime).IsRequired();
+            
+            builder.HasMany(track => track.Results)
+                .WithOne(res => res.Track!)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.HasMany(track => track.Points)
+                .WithOne(point => point.Track!)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }
