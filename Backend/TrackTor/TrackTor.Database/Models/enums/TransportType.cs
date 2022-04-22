@@ -1,6 +1,6 @@
 namespace TrackTor.DataBase.Models.Enums
 {
-    public enum TransportType
+    public enum TransportTypeDB
     {
         Hiking,
         Scooter,
