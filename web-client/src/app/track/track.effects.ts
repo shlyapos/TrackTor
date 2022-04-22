@@ -93,7 +93,6 @@ export class TrackEffects {
     return this.actions$.pipe(
       ofType(trackActions.setActiveTrack),
       filter(({activeTrack}) => activeTrack === null),
-      tap(activeTrack => console.log(activeTrack)),
       mergeMap(() => [
         mapActions.setTrackCoords([]),
         trackActions.setActiveTrackLeaderboard([]),
