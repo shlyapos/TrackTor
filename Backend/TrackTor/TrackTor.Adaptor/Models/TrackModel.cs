@@ -21,7 +21,13 @@ namespace TrackTor.Adaptor.Models
             double? distance,
             DateTime? averageTime)
         {
-            
+            Id = id;
+            UserId = userId;
+            Name = name;
+            Type = type;
+            Region = region;
+            Distance = distance;
+            AverageTime = averageTime;
         }
     }
 }
