@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { BackendInterceptor } from '../mock-api/mock-api.interceptor';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { JwtInterceptor } from "../auth/interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     TuiAlertModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
