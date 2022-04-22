@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "jest -c ./jest.config.js ./src"
   },
   "private": true,
   "dependencies": {
@@ -29,21 +29,28 @@
     "@taiga-ui/kit": "^2.41.1",
     "@types/faker": "^5.5.3",
     "@types/leaflet": "^1.7.9",
+    "jest-junit": "^13.2.0",
     "leaflet": "^1.7.1",
     "ngx-textarea-autosize": "^2.0.3",
     "rxjs": "^6.6.7",
+    "ts-jest": "^27.1.4",
     "ts-mockito": "^2.6.1",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^13.0.3",
     "@angular-devkit/build-angular": "~12.1.1",
     "@angular/cli": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
     "@types/jasmine": "~3.6.0",
+    "@types/jest": "^27.4.1",
     "@types/node": "^12.11.1",
     "faker": "^5.5.3",
+    "glob": "^8.0.1",
     "jasmine-core": "~3.7.0",
+    "jest": "^27.5.1",
+    "jest-preset-angular": "^11.1.1",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
