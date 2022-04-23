@@ -11,5 +11,16 @@ namespace TrackTor.DataBase.Models
 
         public Track? Track { get; set; }
         public User? User { get; set; }
+        
+        public Result(Guid id,
+            Guid userId,
+            Guid trackId,
+            DateTime recordTime)
+        {
+            Id = id;
+            UserId = userId;
+            TrackId = trackId;
+            RecordTime = recordTime;
+        }
     }
 }
