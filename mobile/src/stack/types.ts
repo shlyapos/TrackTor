@@ -12,6 +12,7 @@ export type RootStackParams = {
     name: string;
     transport: string | Transport;
   };
+  Login: undefined;
 };
 
 export type HomeScreenNavigationProp = StackNavigationProp<
@@ -34,4 +35,9 @@ export type TrackRecordScreenRouteProp = RouteProp<
 export type TrackRecordScreenNavigationProp = StackNavigationProp<
   RootStackParams,
   'TrackRecord'
+>;
+
+export type LoginScreenNavigationProp = StackNavigationProp<
+  RootStackParams,
+  'Login'
 >;
