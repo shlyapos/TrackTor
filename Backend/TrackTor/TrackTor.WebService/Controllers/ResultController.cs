@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -33,9 +34,11 @@ namespace TrackTor.Controllers
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpPost]
+        [Authorize]
         [Route("")]
         [SwaggerOperation("Добавить результат пользователя.")]
         [SwaggerResponse(statusCode: 200, type: typeof(ResultDto), description: "результат добавлен.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
         public async Task<IActionResult> AddResult([FromBody] CreateResultDto createResultDto)
         {
@@ -59,9 +62,11 @@ namespace TrackTor.Controllers
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
+        [Authorize]
         [Route("{trackId:guid}")]
         [SwaggerOperation("Получить топ результатов.")]
         [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
         public async Task<IActionResult> GetTopResults(Guid trackId)
         {
@@ -85,9 +90,11 @@ namespace TrackTor.Controllers
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
+        [Authorize]
         [Route("{trackId:guid}/{userId:guid}")]
         [SwaggerOperation("Получить свои результаты.")]
         [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
         public async Task<IActionResult> GetMyResults(Guid trackId, Guid userId)
         {

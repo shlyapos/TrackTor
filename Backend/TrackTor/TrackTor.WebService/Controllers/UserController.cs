@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Security.Claims;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using TrackTor.Adaptor.Models;
 using TrackTor.Dtos;
 using TrackTor.Dtos.User;
@@ -35,7 +36,6 @@ namespace TrackTor.Controllers
         /// Зарегистрировать пользователя.
         /// </summary>
         /// <response code="200">Пользователь зарегистрирован.</response>
-        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpPost]
         [Route("")]
@@ -64,9 +64,11 @@ namespace TrackTor.Controllers
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
+        [Authorize]
         [Route("")]
         [SwaggerOperation("Получить всех пользователей.")]
         [SwaggerResponse(statusCode: 200, description: "Пользователи получены.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
         public async Task<IActionResult> GetUsers()
         {
@@ -88,7 +90,7 @@ namespace TrackTor.Controllers
         /// </summary>
         /// <param name="loginDto">Информация о пользователе</param>
         /// <response code="200">Получен аккаунт с необходимым id.</response>
-        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
+        /// <response code="401">Аутентификационные данные не совпадают.</response>
         /// <response code="404">Аккаунт с указанным id не найден.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpPost("/login")]
