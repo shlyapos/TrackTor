@@ -66,13 +66,6 @@ namespace TrackTor.Adaptor.Repositories
 
         public async Task CreateTrackAsync(TrackModel trackModel, List<TrackCheckPointModel> points)
         {
-            foreach (var point in points)
-            {
-                await _context.AddAsync(new TrackCheckPoint(point.Id, point.TrackId, point.Longitude, point.Latitude));
-            }
-
-            await _context.SaveChangesAsync(); 
-            
             var trackDB = new Track(
                 id: trackModel.Id,
                 userId: trackModel.UserId,
@@ -84,6 +77,12 @@ namespace TrackTor.Adaptor.Repositories
 
             await _context.Track!.AddAsync(trackDB);
             await _context.SaveChangesAsync();
+            
+            foreach (var point in points)
+            {
+                await _context.AddAsync(new TrackCheckPoint(point.Id, point.TrackId, point.Longitude, point.Latitude));
+            }
+            await _context.SaveChangesAsync(); 
         }
 
         public async Task UpdateTrackAsync(Guid id, TrackModel trackModel)
