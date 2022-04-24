@@ -1,16 +1,15 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import TrackListPage from './TrackListPage';
 import { IFrontendTrack } from '../../models/tracks';
 import { HomeScreenNavigationProp } from '../../stack';
 
-interface ITrackListProps {
-  navigation: HomeScreenNavigationProp;
-}
-
 // Временное решение, Дима не обращай внимание))
 const data: IFrontendTrack[] = []; // TODO: подключение стора MobX???
 
-const TrackList: React.FC<ITrackListProps> = ({ navigation }) => {
+const TrackList: React.FC = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   const [trackData, setTrackData] = React.useState(data);
   const [searchValue, setSearchValue] = React.useState('');
 

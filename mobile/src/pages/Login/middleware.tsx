@@ -8,8 +8,7 @@ interface IMiddlewareProps {
 export const Middleware: React.FC<IMiddlewareProps> = ({ navigation }) => {
   React.useEffect(() => {
     navigation.navigate('Login');
-    console.log('Jopa');
-  }, []);
+  });
 
   return null;
 };

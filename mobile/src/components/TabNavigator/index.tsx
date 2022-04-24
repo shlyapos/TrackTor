@@ -30,9 +30,10 @@ const TabNavigator: React.FC<ITabNavigatorProps> = ({ navigation }) => {
       </Tab.Screen>
       <Tab.Screen
         name='TrackList'
-        component={TrackList}
         options={{ tabBarIcon: 'format-list-text', title: 'Список треков' }}
-      />
+      >
+        {() => <TrackList />}
+      </Tab.Screen>
       <Tab.Screen
         name='TrackCreate'
         component={TrackCreate}
