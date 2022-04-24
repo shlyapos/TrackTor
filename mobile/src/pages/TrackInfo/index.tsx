@@ -11,13 +11,23 @@ interface ITrackInfoProps {
 }
 
 const TrackInfo: React.FC<ITrackInfoProps> = ({ route, navigation }) => {
+  const { track } = route.params;
+
   const onPress = () => {
     navigation.navigate('Home');
   };
 
-  const onStart = () => {};
+  const onStart = () => {
+    const { id, name, coords, transport } = track;
 
-  const { track } = route.params;
+    navigation.navigate('TrackRecord', {
+      isRun: true,
+      id,
+      name,
+      routeCoords: coords,
+      transport,
+    });
+  };
 
   return (
     <TrackInfoPage
