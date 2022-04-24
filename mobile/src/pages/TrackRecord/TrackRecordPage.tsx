@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, Text } from 'react-native';
 import { ActivityIndicator, FAB } from 'react-native-paper';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -70,12 +70,16 @@ export default class TrackRecordPage extends PureComponent<ITrackRecordPageProps
           <InfoBlock time={timer} distance={distance} />
 
           {isUserLocLoaded === 'load' ? (
-            <ActivityIndicator
-              animating={true}
-              color={styles.loadAnimate.color}
-              style={styles.loadAnimate}
-              size={60}
-            />
+            <>
+              <Text style={styles.loadText}>Потерпите, ещё чуть чуть...</Text>
+
+              <ActivityIndicator
+                animating={true}
+                color={styles.loadAnimate.color}
+                style={styles.loadAnimate}
+                size={60}
+              />
+            </>
           ) : (
             <View>
               {/* TODO: баг, что при переходе на другую страницу не очищаются маркеры */}

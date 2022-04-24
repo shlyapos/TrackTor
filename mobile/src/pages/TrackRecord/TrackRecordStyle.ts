@@ -2,6 +2,7 @@ import { StyleSheet, Platform, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
 
 import Colors from '../../styles/colors';
+import Fonts from '../../styles/fonts';
 
 const WindowHeight = Dimensions.get('window').height;
 
@@ -10,6 +11,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     paddingTop: Platform.OS === 'ios' ? Constants.statusBarHeight : 0,
+  },
+  loadText: {
+    position: 'absolute',
+    top: WindowHeight / 2 - 56,
+    alignSelf: 'center',
+    ...Fonts.addText,
   },
   fab: {
     position: 'absolute',
@@ -20,7 +27,9 @@ const styles = StyleSheet.create({
   },
   loadAnimate: {
     color: Colors.colorAccent,
-    marginTop: WindowHeight / 2 - 56,
+    position: 'absolute',
+    top: WindowHeight / 2,
+    alignSelf: 'center',
   },
   map: {
     width: '100%',

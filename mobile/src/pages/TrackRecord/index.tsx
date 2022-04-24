@@ -1,12 +1,21 @@
 import React from 'react';
 import * as Location from 'expo-location';
-import { IFrontendTrack, Transport, Coordinate } from '../../models/tracks';
+import {
+  IBackendTrack,
+  IFrontendTrack,
+  Transport,
+  Coordinate,
+} from '../../models/tracks';
 import {
   TrackRecordScreenRouteProp,
   TrackRecordScreenNavigationProp,
 } from '../../stack';
 import { convertTime } from '../../utils/time';
-import { calcCrow, differenceBetweenCoords } from '../../utils/distance';
+import {
+  calcCrow,
+  differenceBetweenCoords,
+  convertDistanceToString,
+} from '../../utils/distance';
 import TrackRecordPage from './TrackRecordPage';
 
 interface ITrackRecordProps {
@@ -15,16 +24,6 @@ interface ITrackRecordProps {
 }
 
 export type loadStatus = 'load' | 'error' | 'done' | 'stop';
-
-const initialTrack: IFrontendTrack = {
-  id: '',
-  name: '',
-  region: '',
-  transport: 'Пешком',
-  distance: '0.0 км',
-  time: '00:00:00',
-  coords: [],
-};
 
 const initialUserLoc: Location.LocationObject = {
   coords: {
@@ -40,7 +39,7 @@ const initialUserLoc: Location.LocationObject = {
 };
 
 const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
-  const [track, setTrack] = React.useState<IFrontendTrack>(initialTrack);
+  const [coords, setCoords] = React.useState<IFrontendTrack['coords']>([]);
   const [isUserLocLoaded, setUserLocLoad] = React.useState<loadStatus>('load');
   const [userLoc, setUserLoc] =
     React.useState<Location.LocationObject>(initialUserLoc);
@@ -59,7 +58,6 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
   };
 
   const updateCoords = (newLoc: Location.LocationObject) => {
-    let { coords } = track;
     let isCoordsUpdate: boolean = false;
 
     const { latitude, longitude } = newLoc.coords;
@@ -77,9 +75,8 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
       isCoordsUpdate = true;
     }
 
-    if (isCoordsUpdate) {
-      coords?.push({ lat: latitude, lon: longitude });
-      setTrack({ ...track, coords });
+    if (isCoordsUpdate && coords) {
+      setCoords((coords) => [...coords!, { lat: latitude, lon: longitude }]);
     }
   };
 
@@ -103,14 +100,7 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
   React.useEffect(() => {
     const { name, transport } = route.params;
 
-    setTrack({
-      ...initialTrack,
-      name,
-      transport: transport as Transport | 'Пешком',
-    });
-
     return () => {
-      setTrack({ ...initialTrack });
       setUserLocLoad('load');
       setUserLoc(initialUserLoc);
       setDistance(0);
@@ -154,6 +144,17 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
   };
 
   const onPressSave = () => {
+    const { name, transport } = route.params;
+
+    const track: IBackendTrack = {
+      id: '',
+      name,
+      transport: transport as Transport | 'Пешком',
+      distance: distance,
+      time: convertTime(timer),
+      coords,
+    };
+
     navigation.navigate('Home');
   };
 
@@ -167,9 +168,9 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
 
   return (
     <TrackRecordPage
-      coords={track.coords}
+      coords={coords}
       timer={convertTime(timer)}
-      distance={(Math.floor(distance * 100) / 100).toString() + ' км'}
+      distance={convertDistanceToString(distance)}
       userLoc={userLoc}
       isUserLocLoaded={isUserLocLoaded}
       onPressPause={onPressPause}
