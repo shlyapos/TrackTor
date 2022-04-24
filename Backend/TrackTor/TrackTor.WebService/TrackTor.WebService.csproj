@@ -24,8 +24,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TrackTor.Adaptor\TrackTor.Adaptor.csproj" />
-      <ProjectReference Include="..\TrackTor.Repositories.Api\TrackTor.Repositories.Api.csproj" />
-      <ProjectReference Include="..\TrackTor.Repositories.Implementation\TrackTor.Repositories.Implementation.csproj" />
+      <ProjectReference Include="..\TrackTor.DataBase\TrackTor.DataBase.csproj" />
     </ItemGroup>
 
 </Project>
