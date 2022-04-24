@@ -11,5 +11,17 @@ namespace TrackTor.DataBase.Models
         public double Latitude { get; set; }
 
         public Track? Track { get; set; }
+
+        public TrackCheckPoint(
+            Guid id,
+            Guid trackId,
+            double longitude,
+            double latitude)
+        {
+            Id = id;
+            TrackId = trackId;
+            Latitude = latitude;
+            Longitude = longitude;
+        }
     }
 }
