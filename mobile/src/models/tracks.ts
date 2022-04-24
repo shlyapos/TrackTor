@@ -1,3 +1,5 @@
+import { convertDistanceToString } from '../utils/distance';
+
 export type Transport =
   | 'Пешком'
   | 'Самокат'
@@ -35,7 +37,7 @@ export const serializeBackendTrack = (from: IBackendTrack): IFrontendTrack => ({
   id: from.id,
   name: from.name,
   region: from.region || 'Неизвестно',
-  distance: from.distance.toString(),
+  distance: convertDistanceToString(from.distance),
   time: from.time,
   transport: from.transport,
   coords: from.coords,
