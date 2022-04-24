@@ -9,12 +9,12 @@ namespace TrackTor.Dtos.Result
         id: Guid.NewGuid(),
         userId: dto.UserId,
         trackId: dto.TrackId,
-        recordTime: dto.RecordTime);
+        recordTime: new DateTime(dto.RecordTime));
 
     public ResultDto Convert(ResultModel model) => new(
         id: model.Id,
         userId: model.UserId,
         trackId: model.TrackId,
-        recordTime: model.RecordTime);
+        recordTime: model.RecordTime.Second);
     }
 }
