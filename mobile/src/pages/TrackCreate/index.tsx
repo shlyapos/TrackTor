@@ -13,10 +13,10 @@ const TrackCreate: React.FC<ITrackCreateProps> = ({ navigation }) => {
     'Пешком'
   ); // TODO: после замены TextInput на Select, надо будет убрать string
 
-  const onChangeName = (value: string) => setName(value); // TODO: после замены TextInput на Select, изменить логику
+  const onChangeName = (value: string) => setName(value); // TODO: нужна проверка, если пусто, то не можем нажать кнопку старта
 
   const onChangeTransport = (value: string) =>
-    setTransport(value as unknown as Transport);
+    setTransport(value as unknown as Transport); // TODO: после замены TextInput на Select, изменить логику
 
   const onPressStart = () => {
     navigation.navigate('TrackRecord', {
