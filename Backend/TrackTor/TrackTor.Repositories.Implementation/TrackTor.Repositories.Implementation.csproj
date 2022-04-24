@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TrackTor.Adaptor\TrackTor.Adaptor.csproj" />
+      <ProjectReference Include="..\TrackTor.DataBase\TrackTor.DataBase.csproj" />
+      <ProjectReference Include="..\TrackTor.Repositories.Api\TrackTor.Repositories.Api.csproj" />
+    </ItemGroup>
+
+</Project>
