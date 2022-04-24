@@ -2,11 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-		<LangVersion>10.0</LangVersion>
+        <LangVersion>10.0</LangVersion>
         <RootNamespace>TrackTor</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Docker.DotNet" Version="3.125.5" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
