@@ -17,6 +17,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd TrackTor/web-client/
+    - run: cd ./TrackTor/web-client/
     - run: npm install 
     - run: npm run test
