@@ -1,18 +1,24 @@
 import { PureComponent } from 'react';
 import { Dimensions, View } from 'react-native';
+import { ActivityIndicator, FAB } from 'react-native-paper';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { boundingBox } from '../../utils/variables';
-import TopMenu from '../../components/TopMenu';
+import { IFrontendTrack } from '../../models/tracks';
 import UserMarker from './components/UserMarker';
+import InfoBlock from './components/InfoBlock';
+import ActionButtons, { IActionButtonsProps } from './components/ActionButtons';
 import { loadStatus } from './index';
 
 import styles from './TrackRecordStyle';
 
-interface ITrackRecordPageProps {
+interface ITrackRecordPageProps extends IActionButtonsProps {
+  coords: IFrontendTrack['coords'];
+  timer: string;
+  distance: string;
   userLoc: Location.LocationObject;
   isUserLocLoaded: loadStatus;
-  onPressBack: () => void;
+  onPressPause: () => void;
 }
 
 export default class TrackRecordPage extends PureComponent<ITrackRecordPageProps> {
@@ -26,8 +32,8 @@ export default class TrackRecordPage extends PureComponent<ITrackRecordPageProps
       this._mapView.animateToRegion({
         latitude: userLoc.coords.latitude,
         longitude: userLoc.coords.longitude,
-        latitudeDelta: latDelta * 0.1,
-        longitudeDelta: lngDelta * 0.1,
+        latitudeDelta: latDelta * 0.05,
+        longitudeDelta: lngDelta * 0.05,
       });
     }
   }
@@ -45,37 +51,90 @@ export default class TrackRecordPage extends PureComponent<ITrackRecordPageProps
   };
 
   render() {
-    const { userLoc, isUserLocLoaded, onPressBack } = this.props;
+    const {
+      coords,
+      timer,
+      distance,
+      userLoc,
+      isUserLocLoaded,
+      onPressPause,
+      onPressSave,
+      onPressContinue,
+      onPressNotSave,
+    } = this.props;
     const { latDelta, lngDelta } = this.magicCalculateZoom();
 
     return (
       <View style={styles.container}>
-        <TopMenu onPress={onPressBack} />
+        <View>
+          <InfoBlock time={timer} distance={distance} />
 
-        {isUserLocLoaded === 'done' && (
-          <MapView
-            ref={(mapView) => {
-              this._mapView = mapView;
-            }}
-            style={styles.map}
-            showsBuildings
-            initialRegion={{
-              latitude: userLoc.coords.latitude,
-              longitude: userLoc.coords.longitude,
-              latitudeDelta: latDelta * 0.5,
-              longitudeDelta: lngDelta * 0.5,
-            }}
-          >
-            <Marker
-              coordinate={{
-                latitude: userLoc.coords.latitude,
-                longitude: userLoc.coords.longitude,
-              }}
-            >
-              <UserMarker />
-            </Marker>
-          </MapView>
-        )}
+          {isUserLocLoaded === 'load' ? (
+            <ActivityIndicator
+              animating={true}
+              color={styles.loadAnimate.color}
+              style={styles.loadAnimate}
+              size={60}
+            />
+          ) : (
+            <View>
+              {/* TODO: баг, что при переходе на другую страницу не очищаются маркеры */}
+              {isUserLocLoaded === 'done' && (
+                <FAB style={styles.fab} icon='pause' onPress={onPressPause} />
+              )}
+              {isUserLocLoaded === 'stop' && (
+                <ActionButtons
+                  onPressSave={onPressSave}
+                  onPressContinue={onPressContinue}
+                  onPressNotSave={onPressNotSave}
+                />
+              )}
+
+              <MapView
+                ref={(mapView) => {
+                  this._mapView = mapView;
+                }}
+                style={styles.map}
+                showsBuildings
+                initialRegion={{
+                  latitude: userLoc.coords.latitude,
+                  longitude: userLoc.coords.longitude,
+                  latitudeDelta: latDelta * 0.5,
+                  longitudeDelta: lngDelta * 0.5,
+                }}
+              >
+                <Marker
+                  coordinate={{
+                    latitude: userLoc.coords.latitude,
+                    longitude: userLoc.coords.longitude,
+                  }}
+                >
+                  <UserMarker />
+                </Marker>
+
+                {coords &&
+                  coords.map(({ lat, lon }, index) => (
+                    <Marker
+                      key={index}
+                      coordinate={{ latitude: lat, longitude: lon }}
+                    />
+                  ))}
+
+                {coords && coords.length > 1 && (
+                  <Polyline
+                    coordinates={coords.map(({ lat, lon }) => ({
+                      latitude: lat,
+                      longitude: lon,
+                    }))}
+                    strokeWidth={2}
+                    strokeColor={styles.mapPolylineColor.color}
+                    lineCap={'round'}
+                  />
+                )}
+              </MapView>
+            </View>
+          )}
+        </View>
       </View>
     );
   }
