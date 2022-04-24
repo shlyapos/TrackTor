@@ -7,12 +7,15 @@ import { boundingBox } from '../../utils/variables';
 import { IFrontendTrack } from '../../models/tracks';
 import UserMarker from './components/UserMarker';
 import InfoBlock from './components/InfoBlock';
+import TrackRunStop from './components/TrackRunStop';
 import ActionButtons, { IActionButtonsProps } from './components/ActionButtons';
 import { loadStatus } from './index';
 
 import styles from './TrackRecordStyle';
 
 interface ITrackRecordPageProps extends IActionButtonsProps {
+  routeCoords?: IFrontendTrack['coords'];
+  finishStatus?: boolean;
   coords: IFrontendTrack['coords'];
   timer: string;
   distance: string;
@@ -52,6 +55,8 @@ export default class TrackRecordPage extends PureComponent<ITrackRecordPageProps
 
   render() {
     const {
+      routeCoords,
+      finishStatus,
       coords,
       timer,
       distance,
@@ -66,79 +71,119 @@ export default class TrackRecordPage extends PureComponent<ITrackRecordPageProps
 
     return (
       <View style={styles.container}>
-        <View>
-          <InfoBlock time={timer} distance={distance} />
+        <InfoBlock time={timer} distance={distance} />
 
-          {isUserLocLoaded === 'load' ? (
-            <>
-              <Text style={styles.loadText}>Потерпите, ещё чуть чуть...</Text>
+        {isUserLocLoaded === 'stop' && routeCoords ? (
+          <TrackRunStop
+            onPressSave={onPressSave}
+            onPressContinue={onPressContinue}
+            onPressNotSave={onPressNotSave}
+            isFinished={finishStatus}
+          />
+        ) : (
+          <View>
+            {isUserLocLoaded === 'load' ? (
+              <>
+                <Text style={styles.loadText}>Потерпите, ещё чуть чуть...</Text>
 
-              <ActivityIndicator
-                animating={true}
-                color={styles.loadAnimate.color}
-                style={styles.loadAnimate}
-                size={60}
-              />
-            </>
-          ) : (
-            <View>
-              {/* TODO: баг, что при переходе на другую страницу не очищаются маркеры */}
-              {isUserLocLoaded === 'done' && (
-                <FAB style={styles.fab} icon='pause' onPress={onPressPause} />
-              )}
-              {isUserLocLoaded === 'stop' && (
-                <ActionButtons
-                  onPressSave={onPressSave}
-                  onPressContinue={onPressContinue}
-                  onPressNotSave={onPressNotSave}
+                <ActivityIndicator
+                  animating={true}
+                  color={styles.loadAnimate.color}
+                  style={styles.loadAnimate}
+                  size={60}
                 />
-              )}
-
-              <MapView
-                ref={(mapView) => {
-                  this._mapView = mapView;
-                }}
-                style={styles.map}
-                showsBuildings
-                initialRegion={{
-                  latitude: userLoc.coords.latitude,
-                  longitude: userLoc.coords.longitude,
-                  latitudeDelta: latDelta * 0.5,
-                  longitudeDelta: lngDelta * 0.5,
-                }}
-              >
-                <Marker
-                  coordinate={{
-                    latitude: userLoc.coords.latitude,
-                    longitude: userLoc.coords.longitude,
-                  }}
-                >
-                  <UserMarker />
-                </Marker>
-
-                {coords &&
-                  coords.map(({ lat, lon }, index) => (
-                    <Marker
-                      key={index}
-                      coordinate={{ latitude: lat, longitude: lon }}
-                    />
-                  ))}
-
-                {coords && coords.length > 1 && (
-                  <Polyline
-                    coordinates={coords.map(({ lat, lon }) => ({
-                      latitude: lat,
-                      longitude: lon,
-                    }))}
-                    strokeWidth={2}
-                    strokeColor={styles.mapPolylineColor.color}
-                    lineCap={'round'}
+              </>
+            ) : (
+              <View>
+                {/* TODO: баг, что при переходе на другую страницу не очищаются маркеры */}
+                {isUserLocLoaded === 'done' && (
+                  <FAB
+                    style={styles.fab}
+                    icon={routeCoords ? 'stop' : 'pause'}
+                    onPress={onPressPause}
                   />
                 )}
-              </MapView>
-            </View>
-          )}
-        </View>
+                {isUserLocLoaded === 'stop' && !routeCoords && (
+                  <ActionButtons
+                    onPressSave={onPressSave}
+                    onPressContinue={onPressContinue}
+                    onPressNotSave={onPressNotSave}
+                  />
+                )}
+
+                <MapView
+                  ref={(mapView) => {
+                    this._mapView = mapView;
+                  }}
+                  style={styles.map}
+                  showsBuildings
+                  initialRegion={{
+                    latitude: userLoc.coords.latitude,
+                    longitude: userLoc.coords.longitude,
+                    latitudeDelta: latDelta * 0.5,
+                    longitudeDelta: lngDelta * 0.5,
+                  }}
+                >
+                  {/* User location marker */}
+                  <Marker
+                    coordinate={{
+                      latitude: userLoc.coords.latitude,
+                      longitude: userLoc.coords.longitude,
+                    }}
+                  >
+                    <UserMarker />
+                  </Marker>
+
+                  {/* Checkpoint markers for record */}
+                  {coords &&
+                    coords.map(({ lat, lon }, index) => (
+                      <Marker
+                        key={index}
+                        coordinate={{ latitude: lat, longitude: lon }}
+                        pinColor={styles.mapMarkerRecord.color}
+                      />
+                    ))}
+
+                  {/* Path lines for record */}
+                  {coords && coords.length > 1 && (
+                    <Polyline
+                      coordinates={coords.map(({ lat, lon }) => ({
+                        latitude: lat,
+                        longitude: lon,
+                      }))}
+                      strokeWidth={2}
+                      strokeColor={styles.mapMarkerRecord.color}
+                      lineCap={'round'}
+                    />
+                  )}
+
+                  {/* Checkpoint markers for track route */}
+                  {routeCoords &&
+                    routeCoords.map(({ lat, lon }, index) => (
+                      <Marker
+                        key={index}
+                        coordinate={{ latitude: lat, longitude: lon }}
+                        pinColor={styles.mapMarkerRoute.color}
+                      />
+                    ))}
+
+                  {/* Path lines for track route */}
+                  {routeCoords && (
+                    <Polyline
+                      coordinates={routeCoords.map(({ lat, lon }) => ({
+                        latitude: lat,
+                        longitude: lon,
+                      }))}
+                      strokeWidth={2}
+                      strokeColor={styles.mapMarkerRoute.color}
+                      lineCap={'round'}
+                    />
+                  )}
+                </MapView>
+              </View>
+            )}
+          </View>
+        )}
       </View>
     );
   }

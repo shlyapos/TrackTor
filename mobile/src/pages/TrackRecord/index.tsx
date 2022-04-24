@@ -39,6 +39,9 @@ const initialUserLoc: Location.LocationObject = {
 };
 
 const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
+  const [finishStatus, setFinishStatus] = React.useState<boolean>(false);
+  const [routeCoords, setRouteCoords] =
+    React.useState<IFrontendTrack['coords']>(undefined);
   const [coords, setCoords] = React.useState<IFrontendTrack['coords']>([]);
   const [isUserLocLoaded, setUserLocLoad] = React.useState<loadStatus>('load');
   const [userLoc, setUserLoc] =
@@ -96,9 +99,39 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
     setUserLocLoad('done');
   };
 
+  const checkFinishStatus = () => {
+    if (coords && routeCoords) {
+      const finishCoord: Coordinate = routeCoords[routeCoords.length - 1];
+      const lastCoord: Coordinate = coords[coords.length - 1];
+
+      return !differenceBetweenCoords(finishCoord, lastCoord);
+    }
+
+    return false;
+  };
+
+  const fetchNewTrack = async () => {
+    const { name, transport } = route.params;
+
+    const track: IBackendTrack = {
+      id: '',
+      name,
+      transport: transport as Transport | 'Пешком',
+      distance: distance,
+      time: convertTime(timer),
+      coords,
+    };
+  };
+
+  const fetchRunResult = async () => {};
+
   // Initialize states on component loaded
   React.useEffect(() => {
-    const { name, transport } = route.params;
+    const { isRun, routeCoords } = route.params;
+
+    if (isRun && routeCoords) {
+      setRouteCoords([...routeCoords]);
+    }
 
     return () => {
       setUserLocLoad('load');
@@ -141,19 +174,12 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
 
   const onPressPause = () => {
     setUserLocLoad('stop');
+
+    if (routeCoords) setFinishStatus(checkFinishStatus());
   };
 
-  const onPressSave = () => {
-    const { name, transport } = route.params;
-
-    const track: IBackendTrack = {
-      id: '',
-      name,
-      transport: transport as Transport | 'Пешком',
-      distance: distance,
-      time: convertTime(timer),
-      coords,
-    };
+  const onPressSave = async () => {
+    routeCoords ? await fetchRunResult() : await fetchNewTrack();
 
     navigation.navigate('Home');
   };
@@ -177,6 +203,8 @@ const TrackRecord: React.FC<ITrackRecordProps> = ({ route, navigation }) => {
       onPressSave={onPressSave}
       onPressContinue={onPressContinue}
       onPressNotSave={onPressNotSave}
+      routeCoords={routeCoords}
+      finishStatus={finishStatus}
     />
   );
 };

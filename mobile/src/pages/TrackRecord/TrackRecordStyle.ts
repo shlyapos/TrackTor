@@ -35,13 +35,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  mapPolylineColor: {
+  mapMarkerRecord: {
     color: Colors.colorAccent,
   },
-  mapMarkerCheckpoint: {
-    color: Colors.colorAccent,
-  },
-  mapMarkerEnd: {
+  mapMarkerRoute: {
     color: '#FF5555',
   },
 });

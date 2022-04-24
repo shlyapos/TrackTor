@@ -5,7 +5,13 @@ import { IFrontendTrack, Transport } from '../models/tracks';
 export type RootStackParams = {
   Home: undefined;
   TrackInfo: { track: IFrontendTrack };
-  TrackRecord: { name: string; transport: string | Transport };
+  TrackRecord: {
+    isRun?: boolean;
+    id?: string;
+    routeCoords?: IFrontendTrack['coords'];
+    name: string;
+    transport: string | Transport;
+  };
 };
 
 export type HomeScreenNavigationProp = StackNavigationProp<
