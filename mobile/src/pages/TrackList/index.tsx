@@ -1,10 +1,10 @@
 import React from 'react';
 import TrackListPage from './TrackListPage';
 import { IFrontendTrack } from '../../models/tracks';
-import { TrackListScreenNavigationProp } from '../../stack';
+import { HomeScreenNavigationProp } from '../../stack';
 
 interface ITrackListProps {
-  navigation: TrackListScreenNavigationProp;
+  navigation: HomeScreenNavigationProp;
 }
 
 // Временное решение, Дима не обращай внимание))
