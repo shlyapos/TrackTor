@@ -9,8 +9,8 @@ namespace TrackTor.Dtos
     {
         public static IServiceCollection AddDtoConverters(this IServiceCollection services)
         {
-            services.AddTransient<IDtoConverter<UserModel, UserDto>, UserConverter>();
-            services.AddTransient<IDtoConverter<ResultModel, ResultDto>, ResultConverter>();
+            services.AddTransient<IDtoConverter<UserModel, CreateUserDto, UserDto>, UserConverter>();
+            services.AddTransient<IDtoConverter<ResultModel,CreateResultDto, ResultDto>, ResultConverter>();
             return services;
         }
     }

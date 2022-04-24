@@ -17,10 +17,10 @@ namespace TrackTor.Controllers
     public class ResultController: ControllerBase
     {
         private readonly IResultRepository _resultRepository;
-        private readonly IDtoConverter<ResultModel, ResultDto> _resultConverter;
+        private readonly IDtoConverter<ResultModel, CreateResultDto, ResultDto> _resultConverter;
 
         public ResultController(IResultRepository resultRepository,
-            IDtoConverter<ResultModel, ResultDto> resultConverter)
+            IDtoConverter<ResultModel, CreateResultDto, ResultDto> resultConverter)
         {
             _resultRepository = resultRepository;
             _resultConverter = resultConverter;
@@ -37,12 +37,12 @@ namespace TrackTor.Controllers
         [SwaggerOperation("Добавить результат пользователя.")]
         [SwaggerResponse(statusCode: 200, type: typeof(ResultDto), description: "результат добавлен.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
-        public async Task<IActionResult> AddUser([FromBody] ResultDto resultDto)
+        public async Task<IActionResult> AddResult([FromBody] CreateResultDto createResultDto)
         {
             IActionResult response;
             try
             {
-                await _resultRepository.AddResultAsync(_resultConverter.Convert(resultDto));
+                await _resultRepository.AddResultAsync(_resultConverter.Convert(createResultDto));
                 response = Ok();
             }
             catch(Exception ex)

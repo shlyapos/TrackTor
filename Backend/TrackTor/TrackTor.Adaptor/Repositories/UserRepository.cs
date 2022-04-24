@@ -31,7 +31,7 @@ namespace TrackTor.Repositories.Implementation
         {
             var salt = RandomString(8);
             var userDb = new User(
-                id: user.Id,
+                id: Guid.NewGuid(),
                 login: user.Login,
                 salt: salt,
                 hash: salt + user.Password

@@ -7,7 +7,7 @@ namespace TrackTor.DataBase.Models
         public Guid Id { get; }
         public Guid UserId { get; set; }
         public Guid TrackId { get; set; }
-        public DateTime RecordTime { get; set; }
+        public int RecordTime { get; set; }
 
         public Track? Track { get; set; }
         public User? User { get; set; }
@@ -15,7 +15,7 @@ namespace TrackTor.DataBase.Models
         public Result(Guid id,
             Guid userId,
             Guid trackId,
-            DateTime recordTime)
+            int recordTime)
         {
             Id = id;
             UserId = userId;

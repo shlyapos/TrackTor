@@ -22,10 +22,10 @@ namespace TrackTor.Controllers
     public class UserController: ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        private readonly IDtoConverter<UserModel, UserDto> _userConverter;
+        private readonly IDtoConverter<UserModel, CreateUserDto, UserDto> _userConverter;
 
         public UserController(IUserRepository userRepository,
-            IDtoConverter<UserModel, UserDto> userConverter)
+            IDtoConverter<UserModel, CreateUserDto, UserDto> userConverter)
         {
             _userRepository = userRepository;
             _userConverter = userConverter;
@@ -42,12 +42,12 @@ namespace TrackTor.Controllers
         [SwaggerOperation("Зарегистрировать пользователя.")]
         [SwaggerResponse(statusCode: 200, type: typeof(UserDto), description: "Пользователь зарегистрирован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
-        public async Task<IActionResult> AddUser([FromBody] UserDto userDto)
+        public async Task<IActionResult> AddUser([FromBody] CreateUserDto createUserDto)
         {
             IActionResult response;
             try
             {
-                await _userRepository.AddUserAsync(_userConverter.Convert(userDto));
+                await _userRepository.AddUserAsync(_userConverter.Convert(createUserDto));
                 response = Ok();
             }
             catch(Exception ex)
