@@ -18,8 +18,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         working-directory: web-client
-    - run: ls -a
-#     - run: cd web-client || ls || pwd
-#     - run: pwd
-#     - run: npm install 
-#     - run: npm run test
+    - name: Build Web-client
+      run: | 
+        cd web-client
+        npm install
+    - name: Test Web-client
+      run: |
+        cd webclient
+        npm run test
