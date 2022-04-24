@@ -1,9 +1,13 @@
 import React from 'react';
 import TrackCreatePage from './TrackCreatePage';
-
 import { Transport } from '../../models/tracks';
+import { HomeScreenNavigationProp } from '../../stack';
 
-const TrackCreate = () => {
+interface ITrackCreateProps {
+  navigation: HomeScreenNavigationProp;
+}
+
+const TrackCreate: React.FC<ITrackCreateProps> = ({ navigation }) => {
   const [name, setName] = React.useState('');
   const [transport, setTransport] = React.useState<string | Transport>(
     'Пешком'
@@ -14,7 +18,12 @@ const TrackCreate = () => {
   const onChangeTransport = (value: string) =>
     setTransport(value as unknown as Transport);
 
-  const onPressStart = () => {};
+  const onPressStart = () => {
+    navigation.navigate('TrackRecord', {
+      name,
+      transport,
+    });
+  };
 
   return (
     <TrackCreatePage
