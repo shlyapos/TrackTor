@@ -8,14 +8,14 @@ import { AuthPageComponent } from './components/auth-page/auth-page.component';
 
 @NgModule({
   declarations: [
-      AuthPageComponent,
+    AuthPageComponent,
   ],
   imports: [
-      CommonModule,
-      AuthRoutingModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MaterialProxyModule,
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialProxyModule,
   ],
 })
 export class AuthModule { }
