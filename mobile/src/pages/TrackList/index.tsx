@@ -1,15 +1,26 @@
 import React from 'react';
 import TrackListPage from './TrackListPage';
-import { IFrontendTrack, serializeBackendTrack } from '../../models/tracks';
+import { IFrontendTrack } from '../../models/tracks';
+import { TrackListScreenNavigationProp } from '../../stack';
+
+interface ITrackListProps {
+  navigation: TrackListScreenNavigationProp;
+}
 
 // Временное решение, Дима не обращай внимание))
 const data: IFrontendTrack[] = []; // TODO: подключение стора MobX???
 
-const TrackList: React.FC = () => {
+const TrackList: React.FC<ITrackListProps> = ({ navigation }) => {
   const [trackData, setTrackData] = React.useState(data);
   const [searchValue, setSearchValue] = React.useState('');
 
-  const onPress = (id: string) => {}; // TODO: во время реализации навигации, поменять переменные и логику
+  const onPress = (id: string) => {
+    const track = trackData.find((track) => track.id === id)!;
+
+    navigation.navigate('TrackInfo', {
+      track,
+    });
+  };
 
   React.useEffect(() => {
     searchValue

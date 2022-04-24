@@ -5,11 +5,11 @@ import { IFrontendTrack } from '../../../../models/tracks';
 import Fonts from './../../../../styles/fonts';
 import styles from './TrackListItemStyle';
 
-interface TrackListItemProps extends IFrontendTrack {
+interface ITrackListItemProps extends IFrontendTrack {
   onPress: (id: string) => void;
 }
 
-export default class TrackListItem extends PureComponent<TrackListItemProps> {
+export default class TrackListItem extends PureComponent<ITrackListItemProps> {
   render() {
     const { id, name, region, transport, distance, time, onPress } = this.props;
 

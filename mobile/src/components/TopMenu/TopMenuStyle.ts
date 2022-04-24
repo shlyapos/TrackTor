@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
   buttonLabel: {
     ...Fonts.text,
   },
+  buttonOnPress: {
+    color: Colors.colorBackground,
+  },
 });
 
 export default styles;

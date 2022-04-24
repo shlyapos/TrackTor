@@ -1,4 +1,4 @@
-type Transport =
+export type Transport =
   | 'Пешком'
   | 'Самокат'
   | 'Велосипед'
@@ -7,8 +7,8 @@ type Transport =
   | 'Лыжи';
 
 type Coordinate = {
-  lon: string;
-  lat: string;
+  lon: number;
+  lat: number;
 };
 
 export interface IBackendTrack {
