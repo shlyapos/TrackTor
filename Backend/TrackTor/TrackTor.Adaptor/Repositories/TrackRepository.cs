@@ -15,6 +15,7 @@ namespace TrackTor.Adaptor.Repositories
     public class TrackRepository: ITrackRepository
     {
         readonly private TrackTorDBContext _context;
+        readonly private long EARTH_RADIUS = 6372795;
 
         public TrackRepository(TrackTorDBContext context)
         {
@@ -30,18 +31,6 @@ namespace TrackTor.Adaptor.Repositories
             var res = new List<TrackModel>();
             foreach (var track in tracks)
             {
-                // DateTime? avgTime;
-                // var first = track.Results!.First().RecordTime.Ticks;
-                // if (first != null)
-                // {
-                //     
-                //     avgTime = new DateTime(first + (long) track.Results!.Average(d => d.RecordTime.Ticks - first));
-                // }
-                // else
-                // {
-                //     avgTime = null;
-                // }
-
                 res.Add(new TrackModel(
                     id: track.Id,
                     userId: track.UserId,
@@ -112,12 +101,23 @@ namespace TrackTor.Adaptor.Repositories
             double res = 0;
             for (int i = 0; i < count - 1; i++)
             {
-                var aLatitude = checkPoints[i].Latitude;
-                var aLongitude = checkPoints[i].Longitude;
-                var bLatitude = checkPoints[i + 1].Latitude;
-                var bLongitude = checkPoints[i + 1].Longitude;
-                res += Math.Sin(aLatitude) + Math.Sin(bLatitude) + Math.Cos(aLatitude) -
-                       Math.Cos(bLatitude) * Math.Cos(bLongitude - aLongitude);
+                var aLatitude = checkPoints[i].Latitude * Math.PI / 180;
+                var aLongitude = checkPoints[i].Longitude * Math.PI / 180;
+                var bLatitude = checkPoints[i + 1].Latitude * Math.PI / 180;
+                var bLongitude = checkPoints[i + 1].Longitude * Math.PI / 180;
+
+                var cl1 = Math.Cos(aLatitude);
+                var cl2 = Math.Cos(bLatitude);
+                var sl1 = Math.Sin(aLatitude);
+                var sl2 = Math.Sin(bLatitude);
+                var delta = bLongitude - aLongitude;
+                var cdelta = Math.Cos(delta);
+                var sdelta = Math.Sin(delta);
+
+                var y = Math.Sqrt(Math.Pow(cl2 * sdelta, 2) + Math.Pow(cl1 * sl2 + sl1 * cl2 * cdelta, 2));
+                var x = sl1 * sl2 + cl1 * cl2 * cdelta;
+
+                res += Math.Atan2(y, x) * EARTH_RADIUS; 
             }
 
             return res;
