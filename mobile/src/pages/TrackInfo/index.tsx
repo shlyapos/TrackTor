@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  TrackInfoScreenScreenRouteProp,
+  TrackInfoScreenRouteProp,
   TrackInfoScreenNavigationProp,
 } from '../../stack';
 import TrackInfoPage from './TrackInfoPage';
 
 interface ITrackInfoProps {
-  route: TrackInfoScreenScreenRouteProp;
+  route: TrackInfoScreenRouteProp;
   navigation: TrackInfoScreenNavigationProp;
 }
 
