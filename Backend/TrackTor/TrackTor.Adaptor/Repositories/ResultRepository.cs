@@ -51,7 +51,7 @@ namespace TrackTor.Repositories.Implementation
         public async Task AddResultAsync(ResultModel result)
         {
             var resultDb = new Result(
-                id: Guid.NewGuid(),
+                id: result.Id,
                 trackId: result.TrackId,
                 userId: result.UserId,
                 recordTime: result.RecordTime
