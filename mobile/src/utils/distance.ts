@@ -1,6 +1,5 @@
 import { Coordinate } from '../models/tracks';
-
-const magicDifferenceValue = 1e-5;
+import { magicDifferenceValue } from './variables';
 
 // Converts numeric degrees to radians
 const toRad = (value: number) => {
@@ -41,4 +40,8 @@ export const differenceBetweenCoords = (
   );
 
   return difference > magicDifferenceValue;
+};
+
+export const convertDistanceToString = (distance: number): string => {
+  return (Math.floor(distance * 100) / 100).toString() + ' км';
 };

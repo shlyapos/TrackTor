@@ -8,3 +8,5 @@ export const boundingBox = {
     longitude: 89.934692,
   },
 };
+
+export const magicDifferenceValue = 1e-5;
