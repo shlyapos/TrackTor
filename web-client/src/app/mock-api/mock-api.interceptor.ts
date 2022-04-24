@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { of } from 'rxjs';
 import { Track } from '../shared/models/track';
 import { TrackLeaderboardRecord } from '../shared/models/leaderboard';
 import { TrackCoord } from '../shared/models/trackCoord';
 import * as faker from 'faker';
+import { User } from '../shared/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,13 @@ export class BackendInterceptor implements HttpInterceptor {
     }
   });
 
+  private mockUser: User = {
+    id: '1',
+    login: 'dimakrut17',
+    token: faker.datatype.string(),
+  };
+  private mockPassword = 'qwerty123';
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (request.method === "GET" && request.url.endsWith("/tracks")) {
@@ -49,6 +57,21 @@ export class BackendInterceptor implements HttpInterceptor {
 
     if (request.method === "GET" && request.url.endsWith("/leaderboard")) {
       return of(new HttpResponse({ status: 200, body: this.mockLeaderboard }));
+    }
+
+    if (request.method === "POST" && request.url.endsWith("/auth")) {
+      if (request.body.login === this.mockUser.login && request.body.password === this.mockPassword) {
+        return of(new HttpResponse({ status: 200, body: this.mockUser }));
+      }
+
+      const error = { name: 'ApiError', message:'ApiError', response: {}};
+      
+      return throwError(error);
+    }
+
+    if (request.method === "POST" && request.url.endsWith("/registration")) {
+      console.log(request);
+      return of(new HttpResponse({ status: 200, body: this.mockUser }));
     }
     
     return next.handle(request)

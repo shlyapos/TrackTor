@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { trackActions } from '../../track.actions';
 
 @Component({
@@ -9,10 +10,18 @@ import { trackActions } from '../../track.actions';
 })
 export class TrackPageComponent implements OnInit {
 
-  constructor(private readonly store$: Store) { }
+  constructor(
+    private readonly store$: Store,
+    private readonly auth: AuthService,
+  ) { }
 
   ngOnInit(): void {
     this.store$.dispatch(trackActions.loadTracks());
   }
+
+  logout() {
+    this.auth.logout();
+  }
+
 
 }

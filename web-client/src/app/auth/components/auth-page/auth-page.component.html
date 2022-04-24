@@ -1,0 +1,23 @@
+<div class="background">
+  <img src="../../../../assets/background.png"/>
+</div>
+
+<div class='auth-forms'>
+  <div class='auth' [formGroup]='authForm'>
+    <div class="app-title">
+      <h1>TrackTor</h1>
+    </div>
+    <h2>Войти</h2>
+    <input formControlName="login" placeholder="Логин">
+    <input type="password" formControlName="password" placeholder="Пароль">
+    <button class="auth-btn" (click)="signIn()">Подтвердить</button>
+  </div>
+
+  <div class='registration' [formGroup]='registrationForm'>
+    <h2 class="title-form">Зарегистрироваться</h2>
+    <input formControlName="login" placeholder="Логин">
+    <input type="password" formControlName="password" placeholder="Пароль">
+    <button class="auth-btn" (click)="registration()">Подтвердить</button>
+  </div>
+</div>
+  
