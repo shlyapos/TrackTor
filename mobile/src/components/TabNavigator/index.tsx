@@ -1,14 +1,19 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Login from '../../pages/Login';
+import { Middleware } from '../../pages/Login/middleware';
+import { LoginScreenNavigationProp } from '../../stack';
 import TrackList from '../../pages/TrackList';
 import TrackCreate from '../../pages/TrackCreate';
 
 import styles from './TabNavigatorStyle';
 
+interface ITabNavigatorProps {
+  navigation: LoginScreenNavigationProp;
+}
+
 const Tab = createMaterialBottomTabNavigator();
 
-const TabNavigator: React.FC = () => {
+const TabNavigator: React.FC<ITabNavigatorProps> = ({ navigation }) => {
   return (
     <Tab.Navigator
       activeColor={styles.navigation.color}
@@ -19,9 +24,10 @@ const TabNavigator: React.FC = () => {
     >
       <Tab.Screen
         name='Login'
-        component={Login}
         options={{ tabBarIcon: 'logout', title: 'Выйти' }}
-      />
+      >
+        {() => <Middleware navigation={navigation} />}
+      </Tab.Screen>
       <Tab.Screen
         name='TrackList'
         component={TrackList}
