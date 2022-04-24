@@ -76,7 +76,14 @@ namespace TrackTor.Controllers
             try
             {
                 var users = await _userRepository.GetUsersAsync();
-                response = Ok(users.Select(user => _userConverter.Convert(user)).ToList());
+                if (users != null)
+                {
+                    response = Ok(users.Select(user => _userConverter.Convert(user)).ToList());
+                }
+                else
+                {
+                    response = StatusCode(StatusCodes.Status204NoContent); 
+                }
             }
             catch(Exception ex)
             {

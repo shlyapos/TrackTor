@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.Adaptor", "TrackTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.DataBase", "TrackTor.DataBase\TrackTor.DataBase.csproj", "{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackTor.Tests", "TrackTor.Tests\TrackTor.Tests.csproj", "{DAAF7E80-E1F5-4650-AA61-1EFD87E27F48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC1A00AB-82FF-4CD0-939E-3F4FD42A5B8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAAF7E80-E1F5-4650-AA61-1EFD87E27F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAAF7E80-E1F5-4650-AA61-1EFD87E27F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAAF7E80-E1F5-4650-AA61-1EFD87E27F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAAF7E80-E1F5-4650-AA61-1EFD87E27F48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
