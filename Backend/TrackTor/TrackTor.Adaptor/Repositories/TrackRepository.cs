@@ -14,8 +14,8 @@ namespace TrackTor.Adaptor.Repositories
 {
     public class TrackRepository: ITrackRepository
     {
-        readonly private TrackTorDBContext _context;
-        readonly private long EARTH_RADIUS = 6372795;
+        private readonly TrackTorDBContext _context;
+        private readonly long EARTH_RADIUS = 6372795;
 
         public TrackRepository(TrackTorDBContext context)
         {
@@ -66,12 +66,12 @@ namespace TrackTor.Adaptor.Repositories
 
         public async Task CreateTrackAsync(TrackModel trackModel, List<TrackCheckPointModel> points)
         {
-            var pointRes = new List<TrackCheckPointModel>();
             foreach (var point in points)
             {
-                pointRes.Add(new TrackCheckPointModel(point.Id, point.TrackId, point.Longitude, point.Latitude));
+                await _context.AddAsync(new TrackCheckPoint(point.Id, point.TrackId, point.Longitude, point.Latitude));
             }
-            var distance = Distance(pointRes);
+
+            await _context.SaveChangesAsync(); 
             
             var trackDB = new Track(
                 id: trackModel.Id,
@@ -79,7 +79,7 @@ namespace TrackTor.Adaptor.Repositories
                 name: trackModel.Name,
                 type: (TransportTypeDB)trackModel.Type,
                 trackModel.Region!,
-                distance,
+                distance: trackModel.Distance,
                 new DateTime(0));
 
             await _context.Track!.AddAsync(trackDB);

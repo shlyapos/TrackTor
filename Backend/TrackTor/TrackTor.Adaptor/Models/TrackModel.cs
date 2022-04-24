@@ -10,7 +10,7 @@ namespace TrackTor.Adaptor.Models
         public string Name { get; set; }
         public TransportType Type { get; set; }
         public string? Region { get; set; }
-        public double? Distance { get; set; }
+        public double Distance { get; set; }
         public DateTime? AverageTime { get; set; }
 
         public TrackModel(Guid id, 
@@ -18,7 +18,7 @@ namespace TrackTor.Adaptor.Models
             string name,
             TransportType type,
             string? region,
-            double? distance,
+            double distance,
             DateTime? averageTime)
         {
             Id = id;
