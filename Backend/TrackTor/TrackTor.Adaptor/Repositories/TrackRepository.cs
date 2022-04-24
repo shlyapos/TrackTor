@@ -83,16 +83,27 @@ namespace TrackTor.Adaptor.Repositories
                 new DateTime(0));
 
             await _context.Track!.AddAsync(trackDB);
+            await _context.SaveChangesAsync();
         }
 
-        public Task UpdateTrackAsync(Guid id, TrackModel trackModel)
+        public async Task UpdateTrackAsync(Guid id, TrackModel trackModel)
         {
-            throw new NotImplementedException();
+            var oldTrack = await _context.Track.Where(track => track.Id == id).FirstOrDefaultAsync();
+            if (oldTrack == null)
+                throw new Exception($"Not found track with such id: {id}");
+
+            oldTrack.Name = trackModel.Name;
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteTrackAsync(Guid id)
+        public async Task DeleteTrackAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var track = await _context.Track.Where(track => track.Id == id).FirstOrDefaultAsync();
+            if (track == null)
+                throw new Exception($"Not found track with such id: {id}");
+
+            _context.Track.Remove(track);
+            await _context.SaveChangesAsync();
         }
 
         private double Distance(List<TrackCheckPointModel> checkPoints)
