@@ -45,9 +45,12 @@ export default class LoginPage extends PureComponent<ILoginPageProps> {
       <KeyboardAvoidingView
         enabled={false}
         behavior={OS === 'ios' ? 'padding' : 'height'}
-        // style={styles.container}
       >
-        <ImageBackground source={backgroundImage} style={styles.container}>
+        <ImageBackground
+          source={backgroundImage}
+          imageStyle={styles.containerImage}
+          style={styles.container}
+        >
           <View style={styles.iconContainer}>
             <MainIcon />
           </View>

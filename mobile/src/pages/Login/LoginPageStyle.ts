@@ -1,11 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 import Colors from '../../styles/colors';
+
+const OSpaddingTop = Platform.OS === 'ios' ? Constants.statusBarHeight : 0;
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    paddingTop: OSpaddingTop,
+  },
+  containerImage: {
+    marginTop: OSpaddingTop,
   },
   iconContainer: {
     backgroundColor: Colors.colorBackground,

@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 import Colors from '../../../../styles/colors';
 
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
     width: 174,
     height: 76,
     position: 'absolute',
-    top: 12,
+    top: Platform.OS === 'ios' ? Constants.statusBarHeight + 12 : 12,
     zIndex: 100,
     paddingTop: 12,
     paddingBottom: 12,
