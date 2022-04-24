@@ -6,7 +6,7 @@ export type Transport =
   | 'Скейтборд'
   | 'Лыжи';
 
-type Coordinate = {
+export type Coordinate = {
   lon: number;
   lat: number;
 };
