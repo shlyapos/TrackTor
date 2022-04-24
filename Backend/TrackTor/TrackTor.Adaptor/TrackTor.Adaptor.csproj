@@ -8,6 +8,6 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+      <ProjectReference Include="..\TrackTor.DataBase\TrackTor.DataBase.csproj" />
     </ItemGroup>
-
 </Project>
