@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using TrackTor.DataBase.Configurations;
 using TrackTor.DataBase.Models;
+#nullable enable
 
 namespace TrackTor.DataBase
 {
     public class TrackTorDBContext: DbContext
     {
-        public TrackTorDBContext()
+        public TrackTorDBContext(DbContextOptions<TrackTorDBContext> options) : base(options)
         {
         }
 

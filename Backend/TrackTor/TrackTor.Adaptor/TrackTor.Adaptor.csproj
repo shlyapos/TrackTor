@@ -5,7 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
     <ItemGroup>
-        <ProjectReference Include="..\TrackTor.DataBase\TrackTor.DataBase.csproj" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+      <ProjectReference Include="..\TrackTor.DataBase\TrackTor.DataBase.csproj" />
     </ItemGroup>
 </Project>

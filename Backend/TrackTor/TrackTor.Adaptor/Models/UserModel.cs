@@ -6,19 +6,16 @@ namespace TrackTor.Adaptor.Models
     {
         public Guid Id { get; }
         public string Login { get; set; }
-        public string Hash { get; set; }
-        public string Salt { get; set; }
+        public string Password { get; set; }
 
         public UserModel(
             Guid id,
             string login,
-            string hash,
-            string salt)
+            string password)
         {
             Id = id;
             Login = login;
-            Hash = hash;
-            Salt = salt;
+            Password = password;
         }
     }
 }

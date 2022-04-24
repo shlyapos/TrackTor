@@ -12,5 +12,16 @@ namespace TrackTor.DataBase.Models
 
         public List<Result>? Results { get; set; }
         public List<Track>? Tracks { get; set; }
+        
+        public User(Guid id,
+            string login,
+            string hash,
+            string salt)
+        {
+            Id = id;
+            Login = login;
+            Hash = hash;
+            Salt = salt;
+        }
     }
 }
