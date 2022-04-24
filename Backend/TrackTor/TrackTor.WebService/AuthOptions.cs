@@ -6,11 +6,11 @@ namespace TrackTor
     public class AuthOptions
     {
         /// <summary>Издатель токена</summary>
-        public const string ISSUER = "AmebusServer"; 
+        public const string ISSUER = "TrackTorServer"; 
         /// <summary>Потребитель токена</summary>
-        public const string AUDIENCE = "AmebusClient"; 
+        public const string AUDIENCE = "TrackTorClient"; 
         /// <summary>Ключ для шифрования</summary>
-        const string KEY = "Amebusbus secret key for authentication";   
+        const string KEY = "TrackTor secret key for authentication";   
         /// <summary>Время жизни токена - сутки</summary>
         public const int LIFETIME = 1440; 
         

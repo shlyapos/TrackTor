@@ -1,51 +1,65 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using TrackTor.Adaptor.Api;
 using TrackTor.Adaptor.Models;
+using TrackTor.DataBase.Models.Enums;
 using TrackTor.Dtos;
 using TrackTor.Dtos.Result;
+using TrackTor.Dtos.Track;
 using TrackTor.Repositories.Api;
 
 
 namespace TrackTor.Controllers
 {
-    [Route("result")]
+    [Route("track")]
     [ApiController]
-    public class ResultController: ControllerBase
+    public class TrackController: ControllerBase
     {
-        private readonly IResultRepository _resultRepository;
-        private readonly IDtoConverter<ResultModel, CreateResultDto, ResultDto> _resultConverter;
+        private readonly ITrackRepository _trackRepository;
 
-        public ResultController(IResultRepository resultRepository,
-            IDtoConverter<ResultModel, CreateResultDto, ResultDto> resultConverter)
+        public TrackController(ITrackRepository trackRepository)
         {
-            _resultRepository = resultRepository;
-            _resultConverter = resultConverter;
+            _trackRepository = trackRepository;
         }
 
         /// <summary>
-        /// Добавить результат.
+        /// Создать трек.
         /// </summary>
-        /// <response code="200">Результат добавлен.</response>
+        /// <response code="200">Трек создан.</response>
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpPost]
         [Authorize]
         [Route("")]
-        [SwaggerOperation("Добавить результат пользователя.")]
-        [SwaggerResponse(statusCode: 200, type: typeof(ResultDto), description: "результат добавлен.")]
-        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
+        [SwaggerOperation("Создать трек.")]
+        [SwaggerResponse(statusCode: 200, type: typeof(ResultDto), description: "Трек создан.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
-        public async Task<IActionResult> AddResult([FromBody] CreateResultDto createResultDto)
+        public async Task<IActionResult> CreateTrack([FromBody] CreateTrackDto trackDto)
         {
             IActionResult response;
             try
             {
-                await _resultRepository.AddResultAsync(_resultConverter.Convert(createResultDto));
+                var points = new List<TrackCheckPointModel>();
+                foreach (var point in trackDto.Points)
+                {
+                    points.Add(new TrackCheckPointModel(Guid.NewGuid(), point.TrackId, point.Longitude, point.Latitude));
+                }
+                await _trackRepository.CreateTrackAsync(new TrackModel(
+                    Guid.NewGuid(),
+                    trackDto.UserId, 
+                    trackDto.Name, 
+                    (TransportType)trackDto.TransportType, 
+                    trackDto.Region, 
+                    trackDto.Distance, 
+                    new DateTime(0)),
+                    points);
                 response = Ok();
             }
             catch(Exception ex)
@@ -56,25 +70,30 @@ namespace TrackTor.Controllers
         }
         
         /// <summary>
-        /// Получить топ результатов по треку.
+        /// Получить все треки.
         /// </summary>
-        /// <response code="200">Результаты получены.</response>
+        /// <response code="200">Треки получены.</response>
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
-        [Authorize]
-        [Route("{trackId:guid}")]
-        [SwaggerOperation("Получить топ результатов.")]
-        [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
-        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
+        [Route("")]
+        [SwaggerOperation("Получить все треки.")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<TrackDto>), description: "Треки получены.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
         public async Task<IActionResult> GetTopResults(Guid trackId)
         {
             IActionResult response;
             try
             {
-                var results = await _resultRepository.FindTopResultAsync(trackId);
-                response = Ok(results.Select(result => _resultConverter.Convert(result)).ToList());
+                var results = await _trackRepository.GetAllTrackAsync();
+                response = Ok(results.Select(track => new TrackDto(
+                    track.Id, 
+                    track.UserId, 
+                    track.Name, 
+                    (int)track.Type,
+                    track.Distance,
+                    track.Region,
+                    track.AverageTime.Second)).ToList());
             }
             catch(Exception ex)
             {
@@ -84,25 +103,30 @@ namespace TrackTor.Controllers
         }
         
         /// <summary>
-        /// Получение результата пользователя по треку
+        /// Получение трека по id
         /// </summary>
         /// <response code="200">Результаты получены.</response>
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
-        [Authorize]
-        [Route("{trackId:guid}/{userId:guid}")]
+        [Route("{trackId:guid}")]
         [SwaggerOperation("Получить свои результаты.")]
         [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
-        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
-        public async Task<IActionResult> GetMyResults(Guid trackId, Guid userId)
+        public async Task<IActionResult> GetMyResults(Guid trackId)
         {
             IActionResult response;
             try
             {
-                var result = await _resultRepository.FindMyResultAsync(trackId, userId);
-                response = Ok(result);
+                var track = await _trackRepository.GetTrackAsync(trackId);
+                response = Ok(new TrackDto(
+                    track.Id, 
+                    track.UserId, 
+                    track.Name, 
+                    (int)track.Type,
+                    track.Distance,
+                    track.Region,
+                    track.AverageTime.Second));
             }
             catch(Exception ex)
             {

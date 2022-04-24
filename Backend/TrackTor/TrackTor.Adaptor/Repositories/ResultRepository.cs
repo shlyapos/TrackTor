@@ -58,6 +58,17 @@ namespace TrackTor.Repositories.Implementation
             );
             await _context.Result!.AddAsync(resultDb);
             await _context.SaveChangesAsync();
+            var track = await _context.Track
+                .Where(track => track.Id == result.TrackId)
+                .Include(track => track.Results)
+                .FirstOrDefaultAsync();
+            var sum = 0;
+            foreach (var res in track.Results)
+            {
+                sum += res.RecordTime.Second;
+            }
+
+            track.AverageTime = new DateTime(sum / track.Results.Count());
         }
     }
 }

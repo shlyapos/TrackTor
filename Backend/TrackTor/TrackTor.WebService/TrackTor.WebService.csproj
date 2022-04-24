@@ -2,10 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>10.0</LangVersion>
         <RootNamespace>TrackTor</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Docker.DotNet" Version="3.125.5" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
@@ -24,8 +26,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TrackTor.Adaptor\TrackTor.Adaptor.csproj" />
-      <ProjectReference Include="..\TrackTor.Repositories.Api\TrackTor.Repositories.Api.csproj" />
-      <ProjectReference Include="..\TrackTor.Repositories.Implementation\TrackTor.Repositories.Implementation.csproj" />
+      <ProjectReference Include="..\TrackTor.DataBase\TrackTor.DataBase.csproj" />
     </ItemGroup>
 
 </Project>
