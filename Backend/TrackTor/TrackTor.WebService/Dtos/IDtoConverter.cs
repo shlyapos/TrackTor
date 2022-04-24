@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="ModelT">Класс модели</typeparam>
     /// <typeparam name="DtoT">Класс dto</typeparam>
-    public interface IDtoConverter<ModelT, DtoT>
+    public interface IDtoConverter<ModelT, CreateDtoT, DtoT>
     {
         /// <summary>
         /// Метод для преобразования модели в dto
@@ -19,6 +19,6 @@
         /// </summary>
         /// <param name="dto">dto</param>
         /// <returns>модель для переданного dto</returns>
-        ModelT Convert(DtoT dto);
+        ModelT Convert(CreateDtoT dto);
     }
 }

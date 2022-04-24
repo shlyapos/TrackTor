@@ -1,11 +1,12 @@
-﻿using TrackTor.Adaptor.Models;
+﻿using System;
+using TrackTor.Adaptor.Models;
 
 namespace TrackTor.Dtos.User
 {
-    public class UserConverter: IDtoConverter<UserModel, UserDto>
+    public class UserConverter: IDtoConverter<UserModel, CreateUserDto, UserDto>
     {
-        public UserModel Convert(UserDto dto) => new (
-            id: dto.Id,
+        public UserModel Convert(CreateUserDto dto) => new (
+            id: Guid.NewGuid(), 
             login: dto.Login,
             password: dto.Password);
 

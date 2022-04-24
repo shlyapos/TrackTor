@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -17,10 +18,10 @@ namespace TrackTor.Controllers
     public class ResultController: ControllerBase
     {
         private readonly IResultRepository _resultRepository;
-        private readonly IDtoConverter<ResultModel, ResultDto> _resultConverter;
+        private readonly IDtoConverter<ResultModel, CreateResultDto, ResultDto> _resultConverter;
 
         public ResultController(IResultRepository resultRepository,
-            IDtoConverter<ResultModel, ResultDto> resultConverter)
+            IDtoConverter<ResultModel, CreateResultDto, ResultDto> resultConverter)
         {
             _resultRepository = resultRepository;
             _resultConverter = resultConverter;
@@ -33,16 +34,18 @@ namespace TrackTor.Controllers
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpPost]
+        [Authorize]
         [Route("")]
         [SwaggerOperation("Добавить результат пользователя.")]
         [SwaggerResponse(statusCode: 200, type: typeof(ResultDto), description: "результат добавлен.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
-        public async Task<IActionResult> AddUser([FromBody] ResultDto resultDto)
+        public async Task<IActionResult> AddResult([FromBody] CreateResultDto createResultDto)
         {
             IActionResult response;
             try
             {
-                await _resultRepository.AddResultAsync(_resultConverter.Convert(resultDto));
+                await _resultRepository.AddResultAsync(_resultConverter.Convert(createResultDto));
                 response = Ok();
             }
             catch(Exception ex)
@@ -59,9 +62,11 @@ namespace TrackTor.Controllers
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
+        [Authorize]
         [Route("{trackId:guid}")]
         [SwaggerOperation("Получить топ результатов.")]
         [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
         public async Task<IActionResult> GetTopResults(Guid trackId)
         {
@@ -85,9 +90,11 @@ namespace TrackTor.Controllers
         /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
+        [Authorize]
         [Route("{trackId:guid}/{userId:guid}")]
         [SwaggerOperation("Получить свои результаты.")]
         [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(EmptyResult), description: "Отказ в доступе: пользователь не авторизован.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
         public async Task<IActionResult> GetMyResults(Guid trackId, Guid userId)
         {
