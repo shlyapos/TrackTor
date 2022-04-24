@@ -59,39 +59,5 @@ namespace TrackTor.Repositories.Implementation
             await _context.Result!.AddAsync(resultDb);
             await _context.SaveChangesAsync();
         }
-        /*
-        public async Task<ScheduleModel> UpdateScheduleAsync(ScheduleModel updateScheduleModel)
-        {
-            var dbScheduleModel = _converter.Convert(updateScheduleModel);
-            
-            var schedule = await _context.Schedule!
-                .Where(s => s.Id == dbScheduleModel.Id)
-                .FirstOrDefaultAsync();
-            
-            if (schedule == null) 
-                throw new NotFoundException($"Schedule with such ID is not found.");
-
-            schedule = dbScheduleModel;
-            
-            await _context.SaveChangesAsync();
-            return _converter.Convert(schedule!);
-        }
-        
-        public async Task<ScheduleModel> DeleteScheduleAsync(Guid id)
-        {
-            var schedule = await _context.Schedule!
-                .Where(s => s.Id == id)
-                .FirstOrDefaultAsync();
-            var scheduleModel = _converter.Convert(schedule!);
-            
-            if (schedule != null)
-            {
-                _context.Schedule!.Remove(schedule);
-                await _context.SaveChangesAsync();
-            }
-
-            return scheduleModel;
-        }
-        */
     }
 }

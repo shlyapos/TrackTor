@@ -35,6 +35,7 @@ namespace TrackTor.Controllers
         /// Зарегистрировать пользователя.
         /// </summary>
         /// <response code="200">Пользователь зарегистрирован.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpPost]
         [Route("")]
@@ -60,6 +61,7 @@ namespace TrackTor.Controllers
         /// Получить всех пользователей.
         /// </summary>
         /// <response code="200">Пользователи получены.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
         [Route("")]

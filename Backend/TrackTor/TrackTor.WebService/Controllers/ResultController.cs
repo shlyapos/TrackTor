@@ -30,6 +30,7 @@ namespace TrackTor.Controllers
         /// Добавить результат.
         /// </summary>
         /// <response code="200">Результат добавлен.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpPost]
         [Route("")]
@@ -55,6 +56,7 @@ namespace TrackTor.Controllers
         /// Получить топ результатов по треку.
         /// </summary>
         /// <response code="200">Результаты получены.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
         [Route("{trackId:guid}")]
@@ -77,9 +79,10 @@ namespace TrackTor.Controllers
         }
         
         /// <summary>
-        /// Получить свои результаты по треку.
+        /// Получение результата пользователя по треку
         /// </summary>
         /// <response code="200">Результаты получены.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
         [Route("{trackId:guid}/{userId:guid}")]

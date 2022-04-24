@@ -8,16 +8,17 @@ namespace TrackTor.Repositories.Api
     public interface IResultRepository
     {
         /// <summary>
-        /// Поиск лучших результатов по id
+        /// Получение отсортированных по рекордному времени результатов по id трека
         /// </summary>
-        /// <param name="id">Id трека</param>
-        /// <returns>Список лучших результатов</returns>
+        /// <param name="trackId">Id трека</param>
+        /// <returns>Список отсортированных по рекордному времени результатов</returns>
         Task<List<ResultModel>> FindTopResultAsync(Guid trackId);
         
         /// <summary>
-        /// Поиск моих результатов по id
+        /// Получение результата пользователя по треку
         /// </summary>
-        /// <param name="id">Id результата</param>
+        /// <param name="trackId">Id трека</param>
+        /// <param name="userId">Id пользователя</param>
         /// <returns>Модель результата</returns>
         Task<ResultModel> FindMyResultAsync(Guid trackId, Guid userId);
         
@@ -25,7 +26,6 @@ namespace TrackTor.Repositories.Api
         /// Добавление результата
         /// </summary>
         /// <param name="result">модель результата</param>
-        /// <returns>Модель результата</returns>
         Task AddResultAsync(ResultModel result);
     }
 }
