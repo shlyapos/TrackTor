@@ -1,6 +1,6 @@
 <div class="track-info" *ngIf="(activeTrack$ | async) as track">
   <textarea autosize class="track-name">{{track.name}}</textarea>
-  <p class="track-transport">{{track.transport}}</p>
+  <p class="track-transport">{{track.transportType | transportType}}</p>
   <p class="track-region">{{track.region}}</p>
   <div class="track-distance">
     <p>Расстояние</p>

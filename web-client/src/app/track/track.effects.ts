@@ -52,7 +52,7 @@ export class TrackEffects {
       ofType(trackActions.setActiveTrack),
       filter(({activeTrack}) => !!activeTrack),
       mergeMap(({activeTrack}) => this.http
-        .get<TrackCoord[]>(`/tracks/${activeTrack?.id}/coords`)
+        .get<TrackCoord[]>(`/tracks/${activeTrack?.id}/points`)
         .pipe(
           map((coords) => mapActions.setTrackCoords(coords)),
           catchError((error) => {
