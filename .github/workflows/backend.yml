@@ -1,5 +1,7 @@
 image: microsoft/dotnet:latest
+name: ASP.NET
 
+on: [push]
 stages:
     - build
     - test
