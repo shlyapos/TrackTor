@@ -1,22 +1,25 @@
-image: microsoft/dotnet:latest
-name: ASP.NET
+name: .NET
 
-on: [push]
-stages:
-    - build
-    - test
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-before_script:
-    - "cd Backend/TrackTor"
-    - "dotnet restore"
+jobs:
+  build:
 
-build:
-    stage: build
-    script:
-        - "dotnet build"
+    runs-on: ubuntu-latest
 
-test:
-    stage: test
-    script: 
-        - "cd Backend/TrackTor/TrackTor.Tests"
-        - "dotnet test"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
