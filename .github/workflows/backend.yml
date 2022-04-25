@@ -23,5 +23,5 @@ jobs:
         dotnet build --no-restore
     - name: Test
       run: | 
-        cd Backend\TrackTor
+        cd Backend/TrackTor
         dotnet test --no-build --verbosity normal
