@@ -1,13 +1,18 @@
 export interface Track {
   id: string;
+  userId: string;
   name: string;
+  transportType: TransportType;
   region: string;
   distance: number;
-  time: string;
-  transport: Transport;
+  time: number;
 }
 
-export type Transport = 
-  | 'foot'
-  | 'skateboard'
-  | 'bicycle' 
+export enum TransportType  {
+  Hiking,
+  Scooter,
+  Bicycle,
+  Roller,
+  Skateboard,
+  Skiing
+}

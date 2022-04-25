@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 
 
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   signIn(login: string, password: string) {
-    return this.http.post<User>('/auth', { login, password })
+    return this.http.post<User>('/login', { login, password })
       .pipe(
         map(user => {
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -61,12 +61,10 @@ export class AuthService {
   }
 
   registration(login: string, password: string) {
-    return this.http.post<User>('/registration', { login, password })
+    return this.http.post<User>('/user', { login, password })
       .pipe(
-        map(user => {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          return user;
+        mergeMap(() => {
+          return this.http.post<User>('/login', { login, password });
         }),
         catchError((error) => {
           this.alertService.open(`${ERROR_MESSAGE_REGISTRATION}: ${error}`, {
