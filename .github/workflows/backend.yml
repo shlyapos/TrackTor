@@ -15,11 +15,12 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: | 
-        cd Backend
-        cd TrackTor
+        cd Backend/TrackTor
         dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: | 
+        cd Backend/TrackTor
+        dotnet build --no-restore
     - name: Test
       run: | 
         cd Backend\TrackTor
