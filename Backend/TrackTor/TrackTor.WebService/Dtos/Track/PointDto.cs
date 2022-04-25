@@ -5,17 +5,17 @@ namespace TrackTor.Dtos.Track
     public class PointDto
     { 
         public Guid TrackId { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
 
         public PointDto(
             Guid trackId,
-            double latitude,
-            double longitude)
+            double lat,
+            double lng)
         {
             TrackId = trackId;
-            Longitude = longitude;
-            Latitude = latitude;
+            Lng = lng;
+            Lat = lat;
         }
     }
 }

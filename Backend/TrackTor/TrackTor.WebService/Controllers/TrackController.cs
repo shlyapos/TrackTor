@@ -18,15 +18,18 @@ using TrackTor.Repositories.Api;
 
 namespace TrackTor.Controllers
 {
-    [Route("track")]
+    [Route("tracks")]
     [ApiController]
     public class TrackController: ControllerBase
     {
         private readonly ITrackRepository _trackRepository;
+        private readonly ITrackCheckPointRepository _pointRepository;
 
-        public TrackController(ITrackRepository trackRepository)
+        public TrackController(ITrackRepository trackRepository,
+            ITrackCheckPointRepository pointRepository)
         {
             _trackRepository = trackRepository;
+            _pointRepository = pointRepository;
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace TrackTor.Controllers
                 var points = new List<TrackCheckPointModel>();
                 foreach (var point in trackDto.Points)
                 {
-                    points.Add(new TrackCheckPointModel(Guid.NewGuid(), point.TrackId, point.Longitude, point.Latitude));
+                    points.Add(new TrackCheckPointModel(Guid.NewGuid(), point.TrackId, point.Lng, point.Lat));
                 }
                 await _trackRepository.CreateTrackAsync(new TrackModel(
                     Guid.NewGuid(),
@@ -80,7 +83,7 @@ namespace TrackTor.Controllers
         [SwaggerOperation("Получить все треки.")]
         [SwaggerResponse(statusCode: 200, type: typeof(List<TrackDto>), description: "Треки получены.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
-        public async Task<IActionResult> GetTopResults(Guid trackId)
+        public async Task<IActionResult> GetAllTracks()
         {
             IActionResult response;
             try
@@ -110,10 +113,10 @@ namespace TrackTor.Controllers
         /// <response code="500">Ошибка на стороне сервера.</response>
         [HttpGet]
         [Route("{trackId:guid}")]
-        [SwaggerOperation("Получить свои результаты.")]
+        [SwaggerOperation("Получение трека по id")]
         [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
         [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
-        public async Task<IActionResult> GetMyResults(Guid trackId)
+        public async Task<IActionResult> GetTrackAsync(Guid trackId)
         {
             IActionResult response;
             try
@@ -135,5 +138,31 @@ namespace TrackTor.Controllers
             return response;
         }
         
+        /// <summary>
+        /// Получить точки 
+        /// </summary>
+        /// <response code="200">Результаты получены.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
+        /// <response code="500">Ошибка на стороне сервера.</response>
+        [HttpGet]
+        [Route("{trackId:guid}/points")]
+        [SwaggerOperation("Получить свои результаты.")]
+        [SwaggerResponse(statusCode: 200, description: "Результаты получены.")]
+        [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
+        public async Task<IActionResult> GetPointsByTrack(Guid trackId)
+        {
+            IActionResult response;
+            try
+            {
+                var points = await _pointRepository.GetPointsByTrackIdAsync(trackId);
+                response = Ok(points.Select(point => new PointDto(
+                    point.Id, point.Latitude, point.Longitude)).ToList());
+            }
+            catch(Exception ex)
+            {
+                response = StatusCode(StatusCodes.Status500InternalServerError, ex.Message); 
+            }
+            return response;
+        }
     }
 }

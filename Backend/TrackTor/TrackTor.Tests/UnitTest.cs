@@ -8,9 +8,6 @@ using TrackTor.Dtos;
 using TrackTor.Dtos.User;
 using TrackTor.Repositories.Api;
 
-
-namespace TrackTor.Tests;
-
 public class UserControllerTest
 {
     private readonly UserController _userController;
