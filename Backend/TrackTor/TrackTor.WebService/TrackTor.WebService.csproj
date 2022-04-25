@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <LangVersion>10.0</LangVersion>
+        <LangVersion>latest</LangVersion>
         <RootNamespace>TrackTor</RootNamespace>
     </PropertyGroup>
 
@@ -27,6 +27,10 @@
     <ItemGroup>
       <ProjectReference Include="..\TrackTor.Adaptor\TrackTor.Adaptor.csproj" />
       <ProjectReference Include="..\TrackTor.DataBase\TrackTor.DataBase.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations" />
     </ItemGroup>
 
 </Project>
