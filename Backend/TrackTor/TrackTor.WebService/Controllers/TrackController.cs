@@ -164,5 +164,39 @@ namespace TrackTor.Controllers
             }
             return response;
         }
+        
+        /// <summary>
+        /// Удалить трек
+        /// </summary>
+        /// <response code="200">Трек удален.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
+        /// <response code="500">Ошибка на стороне сервера.</response>
+        [HttpDelete]
+        [Authorize]
+        [Route("{trackId:guid}")]
+        [SwaggerOperation("Удалить трек")]
+        [SwaggerResponse(statusCode: 200, description: "Трек удален")]
+        [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
+        public async Task<IActionResult> DeleteTrack(Guid trackId)
+        {
+            throw new NotImplementedException();
+        }
+        
+        /// <summary>
+        /// Обновить трек
+        /// </summary>
+        /// <response code="200">Трек обновлен.</response>
+        /// <response code="401">Отказ в доступе: пользователь не авторизован.</response>
+        /// <response code="500">Ошибка на стороне сервера.</response>
+        [HttpPut]
+        [Authorize]
+        [Route("{trackId:guid}")]
+        [SwaggerOperation("Удалить трек")]
+        [SwaggerResponse(statusCode: 200, description: "Трек обновлен")]
+        [SwaggerResponse(statusCode: 500, type: typeof(EmptyResult), description: "Ошибка на стороне сервера.")]
+        public async Task<IActionResult> UpdateTrack(Guid trackId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
