@@ -15,16 +15,13 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: | 
-        cd ..
         cd Backend/TrackTor
         dotnet restore
     - name: Build
       run: | 
-        cd ..
         cd Backend/TrackTor
         dotnet build --no-restore
     - name: Test
       run: | 
-        cd ..
         cd Backend\TrackTor
         dotnet test --no-build --verbosity normal
