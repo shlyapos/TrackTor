@@ -48,7 +48,7 @@ namespace TrackTor.Controllers
             try
             {
                 await _userRepository.AddUserAsync(_userConverter.Convert(createUserDto));
-                response = Ok();
+                response = Ok(new LoginDto(createUserDto.Login, createUserDto.Password));
             }
             catch(Exception ex)
             {
@@ -93,7 +93,7 @@ namespace TrackTor.Controllers
         }
 
         /// <summary>
-        /// Получить аккаунт по id
+        /// Залогиниться
         /// </summary>
         /// <param name="loginDto">Информация о пользователе</param>
         /// <response code="200">Получен аккаунт с необходимым id.</response>
@@ -137,6 +137,7 @@ namespace TrackTor.Controllers
                 var response = new
                 {
                     id = identity!.Name,
+                    login = loginDto.Login,
                     access_token = encodedJwt
                 };
 

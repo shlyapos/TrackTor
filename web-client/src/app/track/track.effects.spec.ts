@@ -16,7 +16,7 @@ import {
 } from "./track.effects";
 import { trackActions } from "./track.actions";
 import { mapActions } from "../map/map.actions";
-import { Track } from "../shared/models/track";
+import { Track, TransportType } from "../shared/models/track";
 import { TrackCoord } from "../shared/models/trackCoord";
 import { TrackLeaderboardRecord } from "../shared/models/leaderboard";
 import providerOf from "../shared/utils/providerOf";
@@ -68,11 +68,12 @@ describe('TrackEffects', () => {
       const mockTracks:Track[] = Array.from({length: randomCount}).map((_, i) => {
         return {
           id: faker.datatype.string(),
+          userId: faker.datatype.string(),
           name: faker.datatype.string(),
+          transportType: TransportType.Hiking,
           region: faker.address.city(),
           distance: faker.datatype.number(),
-          time: faker.datatype.string(),
-          transport: 'foot',
+          time: faker.datatype.number(),
         }
       });
 
@@ -113,12 +114,13 @@ describe('TrackEffects', () => {
     it('Должен вызываться запрос на получение точек маршрута', () => {
       const trackId = faker.datatype.string();
       const mockTrack:Track = {
-        id: trackId,
+        id: faker.datatype.string(),
+        userId: faker.datatype.string(),
         name: faker.datatype.string(),
+        transportType: TransportType.Hiking,
         region: faker.address.city(),
         distance: faker.datatype.number(),
-        time: faker.datatype.string(),
-        transport: 'foot',
+        time: faker.datatype.number(),
       }
 
       when(http.get<TrackCoord[]>(`/tracks/${trackId}/coords`))
@@ -132,13 +134,15 @@ describe('TrackEffects', () => {
     it('Если ответ сервера успешный, то должен диспатчить экшен на сохранение координат трека', () => {
       const trackId = faker.datatype.string();
       const mockTrack:Track = {
-        id: trackId,
+        id: faker.datatype.string(),
+        userId: faker.datatype.string(),
         name: faker.datatype.string(),
+        transportType: TransportType.Hiking,
         region: faker.address.city(),
         distance: faker.datatype.number(),
-        time: faker.datatype.string(),
-        transport: 'foot',
+        time: faker.datatype.number(),
       }
+
       const randomCount = faker.datatype.number({min: 0, max: 10});
       const mockTrackCoords:TrackCoord[] = Array.from({length: randomCount}).map((_, i) => {
         return {
@@ -158,12 +162,13 @@ describe('TrackEffects', () => {
     it('Если ответ сервера неуспешный, то должен показывать уведомление об ошибке', () => {
       const trackId = faker.datatype.string();
       const mockTrack:Track = {
-        id: trackId,
+        id: faker.datatype.string(),
+        userId: faker.datatype.string(),
         name: faker.datatype.string(),
+        transportType: TransportType.Hiking,
         region: faker.address.city(),
         distance: faker.datatype.number(),
-        time: faker.datatype.string(),
-        transport: 'foot',
+        time: faker.datatype.number(),
       }
       const error = { name: 'ApiError', message:'ApiError', response: {}};
      
@@ -195,13 +200,14 @@ describe('TrackEffects', () => {
     it('Должен вызываться запрос на получение таблицы лидеров для трека', () => {
       const trackId = faker.datatype.string();
       const mockTrack:Track = {
-        id: trackId,
-        name: faker.datatype.string(),
-        region: faker.address.city(),
-        distance: faker.datatype.number(),
-        time: faker.datatype.string(),
-        transport: 'foot',
-      }
+          id: faker.datatype.string(),
+          userId: faker.datatype.string(),
+          name: faker.datatype.string(),
+          transportType: TransportType.Hiking,
+          region: faker.address.city(),
+          distance: faker.datatype.number(),
+          time: faker.datatype.number(),
+        }
 
       when(http.get<TrackLeaderboardRecord[]>(`/tracks/${trackId}/leaderboard`))
         .thenReturn(of(anything()));
@@ -214,12 +220,13 @@ describe('TrackEffects', () => {
     it('Если ответ сервера успешный, то должен диспатчить экшен на сохранение таблицы лидеров трека', () => {
       const trackId = faker.datatype.string();
       const mockTrack:Track = {
-        id: trackId,
+        id: faker.datatype.string(),
+        userId: faker.datatype.string(),
         name: faker.datatype.string(),
+        transportType: TransportType.Hiking,
         region: faker.address.city(),
         distance: faker.datatype.number(),
-        time: faker.datatype.string(),
-        transport: 'foot',
+        time: faker.datatype.number(),
       }
       const randomCount = faker.datatype.number({min: 0, max: 10});
       const mockLeaderboard: TrackLeaderboardRecord[] = Array.from({length: randomCount}).map((_, i) => {
@@ -240,12 +247,13 @@ describe('TrackEffects', () => {
     it('Если ответ сервера неуспешный, то должен показывать уведомление об ошибке', () => {
       const trackId = faker.datatype.string();
       const mockTrack:Track = {
-        id: trackId,
+        id: faker.datatype.string(),
+        userId: faker.datatype.string(),
         name: faker.datatype.string(),
+        transportType: TransportType.Hiking,
         region: faker.address.city(),
         distance: faker.datatype.number(),
-        time: faker.datatype.string(),
-        transport: 'foot',
+        time: faker.datatype.number(),
       }
       const error = { name: 'ApiError', message:'ApiError', response: {}};
      

@@ -14,6 +14,7 @@ import { TrackSearchComponent } from './components/track-search/track-search.com
 import { TrackInfoComponent } from './components/track-info/track-info.component';
 import { TrackLeaderboardComponent } from './components/track-leaderboard/track-leaderboard.component';
 import { TrackInfoBackwardComponent } from './components/track-info-backward/track-info-backward.component';
+import { TransportTypePipe } from './pipes/transport-type/transport-type.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TrackInfoBackwardComponent } from './components/track-info-backward/tra
     TrackInfoComponent,
     TrackLeaderboardComponent,
     TrackInfoBackwardComponent,
+    TransportTypePipe,
   ],
   imports: [
     CommonModule,

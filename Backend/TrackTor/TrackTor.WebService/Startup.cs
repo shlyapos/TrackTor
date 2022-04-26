@@ -43,7 +43,7 @@ namespace TrackTor
             services.AddControllers();
             services.AddRepositories();
             services.AddDtoConverters();
-
+            
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -101,6 +101,8 @@ namespace TrackTor
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
