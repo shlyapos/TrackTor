@@ -75,8 +75,8 @@ version: "3.7"
       volumes:
         - ./data:/data
         
-    volumes:
-      postgres_volume:
-        name: 'postgres_volume_001'
-      pg_admin_volume:
-        name: 'pg_admin_volume_001'
+  volumes:
+    postgres_volume:
+      name: 'postgres_volume_001'
+    pg_admin_volume:
+      name: 'pg_admin_volume_001'
