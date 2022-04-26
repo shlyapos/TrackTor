@@ -35,7 +35,7 @@ version: "3.7"
       container_name: tt_web_client_container
       restart: always
       build:
-      dockerfile: ./Dockerfile
+        dockerfile: ./Dockerfile
       context: ../web_client
       env_file:
         - .env
