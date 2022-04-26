@@ -4,7 +4,7 @@ version: "3.7"
       image: postgres:13-alpine
       container_name: tt_database_container
       restart: always
-      user: postgres�
+      user: postgres
       environment:
        - POSTGRES_USER: ${DB_USER}
        - POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -65,15 +65,6 @@ version: "3.7"
         - .env
       ports:
         8080:12003, 12004
-      
-    registry:
-      image: registry:2
-      ports:
-        - "5000:5000"
-      environment:
-        - REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
-      volumes:
-        - ./data:/data
         
   volumes:
     postgres_volume:
